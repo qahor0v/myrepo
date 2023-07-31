@@ -9,6 +9,7 @@ class AppError extends StatelessWidget {
     return Center(
       child: Lottie.asset(
         "assets/animations/animation_lkmc5xa3.json",
+        fit: BoxFit.cover,
       ),
     );
   }

@@ -279,7 +279,7 @@
     },
     {
       "name": "hooks_riverpod",
-      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/hooks_riverpod-2.3.6",
+      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/hooks_riverpod-2.3.7",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -304,6 +304,12 @@
     {
       "name": "iconly",
       "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/iconly-1.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "image_network",
+      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/image_network-2.5.4+1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -458,6 +464,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "pointer_interceptor",
+      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/pointer_interceptor-0.9.3+4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "pointycastle",
       "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/pointycastle-3.7.3",
       "packageUri": "lib/",
@@ -537,15 +549,15 @@
     },
     {
       "name": "sqflite",
-      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/sqflite-2.2.8+4",
+      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/sqflite-2.3.0",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.0"
     },
     {
       "name": "sqflite_common",
-      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/sqflite_common-2.4.5+1",
+      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/sqflite_common-2.5.0",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.0"
     },
     {
       "name": "stack_trace",
@@ -650,8 +662,38 @@
       "languageVersion": "2.15"
     },
     {
+      "name": "webview_flutter",
+      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/webview_flutter-4.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "webview_flutter_android",
+      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/webview_flutter_android-3.9.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "webview_flutter_platform_interface",
+      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/webview_flutter_platform_interface-2.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "webview_flutter_wkwebview",
+      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/webview_flutter_wkwebview-3.7.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "webviewimage",
+      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/webviewimage-0.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
       "name": "win32",
-      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/win32-5.0.5",
+      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/win32-5.0.6",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -680,7 +722,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-07-28T20:14:37.457991Z",
+  "generated": "2023-07-31T00:51:41.022948Z",
   "generator": "pub",
   "generatorVersion": "3.0.6"
 }

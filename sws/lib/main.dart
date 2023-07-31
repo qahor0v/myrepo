@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sws/mobile_app/src/config/router/routers.dart';
 import 'package:sws/mobile_app/src/config/themes/app_colors.dart';
 import 'package:sws/mobile_app/src/presentation/pages/navbar_pages/home.dart';
+import 'package:sws/web_app/web_main.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -14,7 +15,7 @@ void main() {
   ));
   runApp(
     const ProviderScope(
-      child: MyApp(),
+      child: MyWebApp(),
     ),
   );
 }

@@ -15,6 +15,10 @@ class FocusedWrapper extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     final focused = useState<bool>(false);
     return InkWell(
+      splashColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      highlightColor: Colors.transparent,
       onTap: () {
         if (onTap != null) {
           onTap!();

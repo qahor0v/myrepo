@@ -42,24 +42,16 @@ class WebHome extends StatelessWidget {
                 )
               : null,
           body: Center(
-            child: Padding(
-              padding: !isMobile
-                  ? EdgeInsets.only(left: 32, right: 32)
-                  : EdgeInsets.all(8),
-              child: SizedBox(
-                width: isDesktop || isTablet
-                    ? 800
-                    : MediaQuery.of(context).size.width,
-                child: CustomScrollView(
-                  slivers: [
-                    if (isDesktop || isTablet) const WebHomeAppBar(),
-                    if (isDesktop || isTablet) WebHomeMatchWidget(),
-                    WebHomeCategoryTitleWidget(
-                      title: "Yangiliklar",
-                    ),
-                    WebHomeNewsScreen(),
-                  ],
-                ),
+            child: SizedBox(
+              width: isDesktop || isTablet
+                  ? 900
+                  : MediaQuery.of(context).size.width,
+              child: CustomScrollView(
+                slivers: [
+                  if (isDesktop || isTablet) const WebHomeAppBar(),
+                  if (isDesktop || isTablet) WebHomeMatchWidget(),
+                  if (isDesktop || isTablet) WebHomeNewsScreen(),
+                ],
               ),
             ),
           ),
@@ -69,137 +61,346 @@ class WebHome extends StatelessWidget {
   }
 }
 
-class WebHomeCategoryTitleWidget extends StatelessWidget {
-  final String title;
-  const WebHomeCategoryTitleWidget({
-    super.key,
-    required this.title,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 24, bottom: 8),
-        child: Text(
-          title,
-          style: TextStyle(
-            color: mainColor,
-            fontSize: 17,
-            fontWeight: FontWeight.w400,
-            fontFamily: fontFamily2,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class WebHomeNewsScreen extends StatelessWidget {
   const WebHomeNewsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        childCount: 6,
-        (context, index) {
-          return FocusedWrapper(
-            child: (focused) {
-              return AnimatedScale(
-                scale: focused ? 1.03 : 1.0,
-                duration: Duration(milliseconds: 300),
-                child: Container(
-                  height: 116,
-                  padding: EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    color: focused ? darkColor : kDarkColor,
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  margin: EdgeInsets.only(
-                    top: index != 0 ? 16 : 0.0,
-                  ),
-                  child: Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: ImageNetwork(
-                          image:
-                              "https://championat.uz/upload/storage/758643_220.jpg",
-                          height: 100,
-                          width: 120,
-                          onLoading: AppShimmer(),
-                          onError: Icon(
-                            Icons.image,
-                            color: Colors.white,
-                          ),
-                        ),
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 32, right: 32),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 5,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 24,
+                      bottom: 8,
+                      right: 32,
+                    ),
+                    child: Text(
+                      "Yangiliklar",
+                      style: TextStyle(
+                        color: mainColor,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: fontFamily2,
                       ),
-                      WBox(16.0),
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                "The news title, or lorem ipsum dolor about in this news. And also another text have. The news title, or lorem ipsum dolor about in this news. And also another text have.",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: fontFamily2,
-                                  fontWeight: FontWeight.w400,
-                                ),
+                    ),
+                  ),
+                  ...List.generate(
+                    6,
+                    (index) {
+                      return FocusedWrapper(
+                        child: (focused) {
+                          return AnimatedScale(
+                            scale: focused ? 1.03 : 1.0,
+                            duration: Duration(milliseconds: 300),
+                            child: Container(
+                              height: 116,
+                              padding: EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                color: focused ? darkColor : kDarkColor,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              margin: EdgeInsets.only(
+                                top: index != 0 ? 16 : 0.0,
+                              ),
+                              child: Row(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: ImageNetwork(
+                                      image:
+                                          "https://championat.uz/upload/storage/758643_220.jpg",
+                                      height: 100,
+                                      width: 120,
+                                      onLoading: AppShimmer(),
+                                      onError: Icon(
+                                        Icons.image,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  WBox(16.0),
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            "The news title, or lorem ipsum dolor about in this news. And also another text have. The news title, or lorem ipsum dolor about in this news. And also another text have.",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: fontFamily2,
+                                              fontWeight: FontWeight.w100,
+                                            ),
+                                          ),
+                                        ),
+                                        HBox(8.0),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              IconlyLight.calendar,
+                                              size: 20,
+                                              color: Colors.grey,
+                                            ),
+                                            WBox(2.0),
+                                            Text(
+                                              "2023.07.31 | 22:05",
+                                              style: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                fontFamily: fontFamily2,
+                                              ),
+                                            ),
+                                            WBox(8.0),
+                                            Spacer(),
+                                            Icon(
+                                              IconlyLight.message,
+                                              size: 20,
+                                              color: Colors.grey,
+                                            ),
+                                            WBox(2.0),
+                                            Text(
+                                              "221",
+                                              style: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                fontFamily: fontFamily2,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            HBox(8.0),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                          );
+                        },
+                      );
+                    },
+                  ),
+                  HBox(16.0),
+                  FocusedWrapper(
+                    child: (focused) {
+                      return AnimatedScale(
+                        scale: focused ? 1.03 : 1.0,
+                        duration: const Duration(milliseconds: 300),
+                        child: Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.only(top: 10, bottom: 10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            color: focused ? darkColor : kDarkColor,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Barcha yangiliklar",
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: fontFamily,
+                                ),
+                              ),
+                              WBox(8.0),
+                              const Icon(
+                                IconlyLight.arrow_right_2,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  HBox(40.0),
+                ],
+              ),
+            ),
+            WBox(24.0),
+            Expanded(
+              flex: 4,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 24,
+                      bottom: 8,
+                    ),
+                    child: Text(
+                      "Tomosha qiling",
+                      style: TextStyle(
+                        color: mainColor,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: fontFamily2,
+                      ),
+                    ),
+                  ),
+                  ...List<Widget>.generate(3, (index) {
+                    return FocusedWrapper(
+                      child: (focused) {
+                        return AnimatedScale(
+                          scale: focused ? 1.03 : 1.0,
+                          duration: Duration(milliseconds: 300),
+                          child: Container(
+                            margin: EdgeInsets.only(
+                              top: index != 0 ? 16 : 0.0,
+                            ),
+                            padding: EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              color: focused ? darkColor : kDarkColor,
+                            ),
+                            child: Column(
                               children: [
-                                Icon(
-                                  IconlyLight.calendar,
-                                  size: 20,
-                                  color: Colors.grey,
-                                ),
-                                WBox(2.0),
-                                Text(
-                                  "2023.07.31 | 22:05",
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w300,
-                                    fontFamily: fontFamily2,
+                                SizedBox(
+                                  height: 150,
+                                  child: Stack(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        child: ImageNetwork(
+                                          image:
+                                              "https://championat.uz/upload/storage/758643_220.jpg",
+                                          height: 150,
+                                          width: 500,
+                                          onLoading: AppShimmer(),
+                                          onError: Icon(
+                                            Icons.image,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      Center(
+                                        child: Icon(
+                                          IconlyLight.play,
+                                          color: mainColor,
+                                          size: 32,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                WBox(8.0),
-                                Spacer(),
-                                Icon(
-                                  IconlyLight.message,
-                                  size: 20,
-                                  color: Colors.grey,
+                                HBox(8.0),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      IconlyLight.video,
+                                      size: 20,
+                                      color: Colors.grey,
+                                    ),
+                                    WBox(2.0),
+                                    Text(
+                                      "07:21",
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w300,
+                                        fontFamily: fontFamily2,
+                                      ),
+                                    ),
+                                    WBox(8.0),
+                                    Spacer(),
+                                    Icon(
+                                      IconlyLight.calendar,
+                                      size: 20,
+                                      color: Colors.grey,
+                                    ),
+                                    WBox(2.0),
+                                    Text(
+                                      "2023.07.31 | 22:05",
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w300,
+                                        fontFamily: fontFamily2,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                WBox(2.0),
+                                HBox(8.0),
                                 Text(
-                                  "221",
+                                  "The news title, or lorem ipsum dolor about in this news. And also another text have. The news title, or lorem ipsum dolor about in this news. And also another text have.",
                                   style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w300,
+                                    color: Colors.white,
                                     fontFamily: fontFamily2,
+                                    fontWeight: FontWeight.w100,
                                   ),
-                                )
+                                  maxLines: 3,
+                                ),
                               ],
                             ),
-                          ],
+                          ),
+                        );
+                      },
+                    );
+                  }),
+                  HBox(16.0),
+                  FocusedWrapper(
+                    child: (focused) {
+                      return AnimatedScale(
+                        scale: focused ? 1.03 : 1.0,
+                        duration: const Duration(milliseconds: 300),
+                        child: Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.only(top: 10, bottom: 10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            color: focused ? darkColor : kDarkColor,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Ko'proq videolar",
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: fontFamily,
+                                ),
+                              ),
+                              WBox(8.0),
+                              const Icon(
+                                IconlyLight.arrow_right_2,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      );
+                    },
                   ),
-                ),
-              );
-            },
-          );
-        },
+                  HBox(40.0),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

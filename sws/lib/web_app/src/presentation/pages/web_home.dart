@@ -1,17 +1,17 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:iconly/iconly.dart';
 import 'package:image_network/image_network.dart';
 import 'package:sws/mobile_app/src/config/themes/app_colors.dart';
 import 'package:sws/mobile_app/src/config/themes/fonts.dart';
-import 'package:sws/mobile_app/src/presentation/providers/soccer_providers.dart';
-import 'package:sws/mobile_app/src/presentation/screens/helpers/error_screen.dart';
-import 'package:sws/mobile_app/src/presentation/screens/helpers/loading_screen.dart';
 import 'package:sws/mobile_app/src/presentation/screens/helpers/sized_box.dart';
+import 'package:sws/mobile_app/src/presentation/screens/home_screens/category_button_widget.dart';
 import 'package:sws/mobile_app/src/presentation/screens/shimmers/app_shimmer.dart';
 import 'package:sws/web_app/src/presentation/screens/desktop_screens/app_bar.dart';
+import 'package:sws/web_app/src/presentation/screens/desktop_screens/home_match_widget.dart';
 import 'package:sws/web_app/src/presentation/screens/siderbar.dart';
+import 'package:sws/web_app/src/presentation/widgets/focused_wrapper.dart';
 import 'package:sws/web_app/src/utils/extensions/get_device_type.dart';
 
 class WebHome extends StatelessWidget {
@@ -42,15 +42,24 @@ class WebHome extends StatelessWidget {
                 )
               : null,
           body: Center(
-            child: SizedBox(
-              width: isDesktop || isTablet
-                  ? 800
-                  : MediaQuery.of(context).size.width,
-              child: CustomScrollView(
-                slivers: [
-                  if (isDesktop || isTablet) const WebHomeAppBar(),
-                  if (isDesktop || isTablet) WebHomeMatchWidget(),
-                ],
+            child: Padding(
+              padding: !isMobile
+                  ? EdgeInsets.only(left: 32, right: 32)
+                  : EdgeInsets.all(8),
+              child: SizedBox(
+                width: isDesktop || isTablet
+                    ? 800
+                    : MediaQuery.of(context).size.width,
+                child: CustomScrollView(
+                  slivers: [
+                    if (isDesktop || isTablet) const WebHomeAppBar(),
+                    if (isDesktop || isTablet) WebHomeMatchWidget(),
+                    WebHomeCategoryTitleWidget(
+                      title: "Yangiliklar",
+                    ),
+                    WebHomeNewsScreen(),
+                  ],
+                ),
               ),
             ),
           ),
@@ -60,113 +69,136 @@ class WebHome extends StatelessWidget {
   }
 }
 
-class WebHomeMatchWidget extends HookConsumerWidget {
-  const WebHomeMatchWidget({super.key});
+class WebHomeCategoryTitleWidget extends StatelessWidget {
+  final String title;
+  const WebHomeCategoryTitleWidget({
+    super.key,
+    required this.title,
+  });
 
   @override
-  Widget build(BuildContext context, ref) {
-    final getter = ref.watch(getAllEventsProvider);
+  Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: getter.when(
-        data: (data) {
-          return Row(
-            children: [
-              Expanded(
-                  child: Column(
-                children: List<Widget>.generate(data.length - data.length ~/ 2,
-                    (index) {
-                  final event = data[index];
-                  return Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: darkColor,
-                    ),
-                    padding: EdgeInsets.only(
-                      left: 8,
-                      right: 8,
-                      top: 8,
-                      bottom: 8,
-                    ),
-                    margin: EdgeInsets.only(top: 16),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  event.match_hometeam_name.trim(),
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: fontFamily2,
-                                  ),
-                                  maxLines: 1,
-                                ),
-                              ),
-                              WBox(8.0),
-                              ClipRRect(
-                                child: ImageNetwork(
-                                  image: event.team_home_badge,
-                                  height: 30,
-                                  width: 30,
-                                  onError: Icon(
-                                    Icons.sports_soccer,
-                                    color: Colors.white,
-                                  ),
-                                  onLoading: AppShimmer(),
-                                ),
-                              ),
-                            ],
+      child: Padding(
+        padding: const EdgeInsets.only(top: 24, bottom: 8),
+        child: Text(
+          title,
+          style: TextStyle(
+            color: mainColor,
+            fontSize: 17,
+            fontWeight: FontWeight.w400,
+            fontFamily: fontFamily2,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class WebHomeNewsScreen extends StatelessWidget {
+  const WebHomeNewsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        childCount: 6,
+        (context, index) {
+          return FocusedWrapper(
+            child: (focused) {
+              return AnimatedScale(
+                scale: focused ? 1.03 : 1.0,
+                duration: Duration(milliseconds: 300),
+                child: Container(
+                  height: 116,
+                  padding: EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    color: focused ? darkColor : kDarkColor,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  margin: EdgeInsets.only(
+                    top: index != 0 ? 16 : 0.0,
+                  ),
+                  child: Row(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: ImageNetwork(
+                          image:
+                              "https://championat.uz/upload/storage/758643_220.jpg",
+                          height: 100,
+                          width: 120,
+                          onLoading: AppShimmer(),
+                          onError: Icon(
+                            Icons.image,
+                            color: Colors.white,
                           ),
                         ),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              ClipRRect(
-                                child: ImageNetwork(
-                                  image: event.team_home_badge,
-                                  height: 30,
-                                  width: 30,
-                                  onError: Icon(
-                                    Icons.sports_soccer,
-                                    color: Colors.white,
-                                  ),
-                                  onLoading: AppShimmer(),
+                      ),
+                      WBox(16.0),
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                "The news title, or lorem ipsum dolor about in this news. And also another text have. The news title, or lorem ipsum dolor about in this news. And also another text have.",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: fontFamily2,
+                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
-                              WBox(8.0),
-                              Expanded(
-                                child: Text(
-                                  event.match_hometeam_name.trim(),
+                            ),
+                            HBox(8.0),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  IconlyLight.calendar,
+                                  size: 20,
+                                  color: Colors.grey,
+                                ),
+                                WBox(2.0),
+                                Text(
+                                  "2023.07.31 | 22:05",
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.grey,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w300,
                                     fontFamily: fontFamily2,
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
+                                WBox(8.0),
+                                Spacer(),
+                                Icon(
+                                  IconlyLight.message,
+                                  size: 20,
+                                  color: Colors.grey,
+                                ),
+                                WBox(2.0),
+                                Text(
+                                  "221",
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w300,
+                                    fontFamily: fontFamily2,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  );
-                }),
-              )),
-              WBox(24.0),
-              Expanded(
-                  child: Column(
-                children: [],
-              ))
-            ],
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
           );
-        },
-        error: (e, m) {
-          return const AppError();
-        },
-        loading: () {
-          return const AppLoading();
         },
       ),
     );

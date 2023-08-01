@@ -1,13 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-  import 'package:sws/mobile_app/src/config/themes/app_colors.dart';
+import 'package:sws/mobile_app/src/config/themes/app_colors.dart';
 import 'package:sws/mobile_app/src/config/themes/fonts.dart';
-  import 'package:sws/web_app/src/presentation/screens/desktop_screens/app_bar.dart';
+import 'package:sws/web_app/src/presentation/screens/desktop_screens/app_bar.dart';
 import 'package:sws/web_app/src/presentation/screens/desktop_screens/home_match_widget.dart';
 import 'package:sws/web_app/src/presentation/screens/desktop_screens/home_news_screen.dart';
 import 'package:sws/web_app/src/presentation/screens/siderbar.dart';
- import 'package:sws/web_app/src/utils/extensions/get_device_type.dart';
+import 'package:sws/web_app/src/utils/extensions/get_device_type.dart';
 
 class WebHome extends StatelessWidget {
   const WebHome({super.key});
@@ -44,9 +44,7 @@ class WebHome extends StatelessWidget {
               child: CustomScrollView(
                 slivers: [
                   if (isDesktop || isTablet) const WebHomeAppBar(index: 0),
-                  
                   if (isDesktop || isTablet) WebHomeMatchWidget(),
-
                   if (isDesktop || isTablet) WebHomeNewsScreen(),
                 ],
               ),
@@ -58,3 +56,15 @@ class WebHome extends StatelessWidget {
   }
 }
 
+// class WebButton extends StatelessWidget {
+//   const WebButton({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return FocusedWrapper(
+//       child: (focused) {
+//         return 
+//       },
+//     );
+//   }
+// }

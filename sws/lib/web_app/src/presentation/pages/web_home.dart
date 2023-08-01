@@ -47,8 +47,10 @@ class WebHome extends StatelessWidget {
                   : MediaQuery.of(context).size.width,
               child: CustomScrollView(
                 slivers: [
-                  if (isDesktop || isTablet) const WebHomeAppBar(),
+                  if (isDesktop || isTablet) const WebHomeAppBar(index: 0),
+                  
                   if (isDesktop || isTablet) WebHomeMatchWidget(),
+
                   if (isDesktop || isTablet) WebHomeNewsScreen(),
                 ],
               ),

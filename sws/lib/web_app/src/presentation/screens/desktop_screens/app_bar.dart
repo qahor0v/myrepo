@@ -5,7 +5,11 @@ import 'package:sws/mobile_app/src/presentation/screens/helpers/sized_box.dart';
 import 'package:sws/web_app/src/presentation/widgets/focused_wrapper.dart';
 
 class WebHomeAppBar extends StatelessWidget {
-  const WebHomeAppBar({super.key});
+  final int index;
+  const WebHomeAppBar({
+    super.key,
+    required this.index,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,90 +35,145 @@ class WebHomeAppBar extends StatelessWidget {
             ),
             const Spacer(),
             WBox(16.0),
-            FocusedWrapper(
-              child: (bool isFocused) {
-                return AnimatedSize(
-                  duration: const Duration(milliseconds: 300),
-                  child: Text(
+            index == 0
+                ? const Text(
                     "Bosh sahifa",
                     style: TextStyle(
-                      color: isFocused ? mainColor : Colors.white,
-                      fontSize: isFocused ? 18 : 16,
-                      fontWeight: isFocused ? FontWeight.bold : FontWeight.w400,
+                      color: mainColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                       fontFamily: fontFamily2,
                     ),
+                  )
+                : FocusedWrapper(
+                    child: (bool isFocused) {
+                      return AnimatedSize(
+                        duration: const Duration(milliseconds: 300),
+                        child: Text(
+                          "Bosh sahifa",
+                          style: TextStyle(
+                            color: isFocused ? mainColor : Colors.white,
+                            fontSize: isFocused ? 18 : 16,
+                            fontWeight:
+                                isFocused ? FontWeight.bold : FontWeight.w400,
+                            fontFamily: fontFamily2,
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
             WBox(16.0),
-            FocusedWrapper(
-              child: (bool isFocused) {
-                return AnimatedSize(
-                  duration: const Duration(milliseconds: 300),
-                  child: Text(
+            index == 1
+                ? const Text(
                     "Yangiliklar",
                     style: TextStyle(
-                      color: isFocused ? mainColor : Colors.white,
-                      fontSize: isFocused ? 18 : 16,
-                      fontWeight: isFocused ? FontWeight.bold : FontWeight.w400,
+                      color: mainColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                       fontFamily: fontFamily2,
                     ),
+                  )
+                : FocusedWrapper(
+                    child: (bool isFocused) {
+                      return AnimatedSize(
+                        duration: const Duration(milliseconds: 300),
+                        child: Text(
+                          "Yangiliklar",
+                          style: TextStyle(
+                            color: isFocused ? mainColor : Colors.white,
+                            fontSize: isFocused ? 18 : 16,
+                            fontWeight:
+                                isFocused ? FontWeight.bold : FontWeight.w400,
+                            fontFamily: fontFamily2,
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
             WBox(16.0),
-            FocusedWrapper(
-              child: (bool isFocused) {
-                return AnimatedSize(
-                  duration: const Duration(milliseconds: 300),
-                  child: Text(
+            index == 2
+                ? const Text(
                     "Ligalar",
                     style: TextStyle(
-                      color: isFocused ? mainColor : Colors.white,
-                      fontSize: isFocused ? 18 : 16,
-                      fontWeight: isFocused ? FontWeight.bold : FontWeight.w400,
+                      color: mainColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                       fontFamily: fontFamily2,
                     ),
+                  )
+                : FocusedWrapper(
+                    child: (bool isFocused) {
+                      return AnimatedSize(
+                        duration: const Duration(milliseconds: 300),
+                        child: Text(
+                          "Ligalar",
+                          style: TextStyle(
+                            color: isFocused ? mainColor : Colors.white,
+                            fontSize: isFocused ? 18 : 16,
+                            fontWeight:
+                                isFocused ? FontWeight.bold : FontWeight.w400,
+                            fontFamily: fontFamily2,
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
             WBox(16.0),
-            FocusedWrapper(
-              child: (bool isFocused) {
-                return AnimatedSize(
-                  duration: const Duration(milliseconds: 300),
-                  child: Text(
+            index == 3
+                ? const Text(
                     "TV",
                     style: TextStyle(
-                      color: isFocused ? mainColor : Colors.white,
-                      fontSize: isFocused ? 18 : 16,
-                      fontWeight: isFocused ? FontWeight.bold : FontWeight.w400,
+                      color: mainColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                       fontFamily: fontFamily2,
                     ),
+                  )
+                : FocusedWrapper(
+                    child: (bool isFocused) {
+                      return AnimatedSize(
+                        duration: const Duration(milliseconds: 300),
+                        child: Text(
+                          "TV",
+                          style: TextStyle(
+                            color: isFocused ? mainColor : Colors.white,
+                            fontSize: isFocused ? 18 : 16,
+                            fontWeight:
+                                isFocused ? FontWeight.bold : FontWeight.w400,
+                            fontFamily: fontFamily2,
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
             WBox(16.0),
-            FocusedWrapper(
-              child: (bool isFocused) {
-                return AnimatedSize(
-                  duration: const Duration(milliseconds: 300),
-                  child: Text(
+            index == 4
+                ? const Text(
                     "Biz haqimizda",
                     style: TextStyle(
-                      color: isFocused ? mainColor : Colors.white,
-                      fontSize: isFocused ? 18 : 16,
-                      fontWeight: isFocused ? FontWeight.bold : FontWeight.w400,
+                      color: mainColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                       fontFamily: fontFamily2,
                     ),
+                  )
+                : FocusedWrapper(
+                    child: (bool isFocused) {
+                      return AnimatedSize(
+                        duration: const Duration(milliseconds: 300),
+                        child: Text(
+                          "Biz haqimizda",
+                          style: TextStyle(
+                            color: isFocused ? mainColor : Colors.white,
+                            fontSize: isFocused ? 18 : 16,
+                            fontWeight:
+                                isFocused ? FontWeight.bold : FontWeight.w400,
+                            fontFamily: fontFamily2,
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
             WBox(8.0),
           ],
         ),

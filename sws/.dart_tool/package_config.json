@@ -188,6 +188,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "firedart",
+      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/firedart-0.9.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "fixnum",
       "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/fixnum-1.1.0",
       "packageUri": "lib/",
@@ -272,10 +278,22 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "googleapis_auth",
+      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/googleapis_auth-1.4.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "graphs",
       "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/graphs-2.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "grpc",
+      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/grpc-3.2.3",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
     },
     {
       "name": "hooks_riverpod",
@@ -286,6 +304,12 @@
     {
       "name": "http",
       "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "http2",
+      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/http2-2.2.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -480,6 +504,12 @@
       "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/pool-1.5.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "protobuf",
+      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/protobuf-3.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
     },
     {
       "name": "pub_semver",
@@ -722,7 +752,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-08-03T03:43:00.873492Z",
+  "generated": "2023-08-04T20:27:18.411088Z",
   "generator": "pub",
   "generatorVersion": "3.0.6"
 }

@@ -51,7 +51,7 @@ class _HomeState extends ConsumerState<Home>
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: NavBar(
+      bottomNavigationBar: NavBar(
         controller: controller,
         page: page,
         showBall: showBall,

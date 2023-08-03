@@ -15,8 +15,8 @@ class ScoreRequestURLs {
 
   static String getEvents(String id) {
     DateTime now = DateTime.now();
-    DateTime yesterday = now.subtract(const Duration(days: 4));
-    DateTime tomorrow = now.add(const Duration(days: 1));
+    DateTime yesterday = now.subtract(const Duration(hours: 12));
+    DateTime tomorrow = now.add(const Duration(hours: 12));
     return "https://apiv3.apifootball.com/?action=get_events&from=${yesterday.year}-${yesterday.month}-${yesterday.day}&to=${tomorrow.year}-${tomorrow.month}-${tomorrow.day}&league_id=$id&APIkey=$scoreKEY";
   }
 }

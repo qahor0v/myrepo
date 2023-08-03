@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:sws/mobile_app/src/config/themes/app_colors.dart';
 import 'package:sws/mobile_app/src/presentation/screens/helpers/sized_box.dart';
- import 'package:sws/mobile_app/src/utils/constants/asset_icons.dart';
+import 'package:sws/mobile_app/src/utils/constants/asset_icons.dart';
+
 class NavBar extends StatelessWidget {
   final PageController controller;
   final ValueNotifier<int> page;
   final ValueNotifier<double> x;
   final ValueNotifier<double> y;
   final ValueNotifier<bool> showBall;
+
   const NavBar({
     super.key,
     required this.controller,
@@ -20,15 +22,18 @@ class NavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
+      height: 64,
       width: double.infinity,
-      margin: const EdgeInsets.only(
-        left: 32,
-        right: 32,
-      ),
-      decoration: BoxDecoration(
-        color: darkColor,
-        borderRadius: BorderRadius.circular(16),
+      // margin: const EdgeInsets.only(
+      //   left: 32,
+      //   right: 32,
+      // ),
+      decoration: const BoxDecoration(
+        color: Colors.black,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
       ),
       child: Stack(
         children: [
@@ -42,35 +47,35 @@ class NavBar extends StatelessWidget {
                 page.value == 0
                     ? selected("Asosiy", AssetIcons.home, showBall.value)
                     : unselected("Asosiy", AssetIcons.home, () {
-                  controller.jumpToPage(0);
-                  page.value = 0;
-                  showBall.value = true;
-                  x.value = -0.72;
-                }),
+                        controller.jumpToPage(0);
+                        page.value = 0;
+                        showBall.value = true;
+                        x.value = -0.72;
+                      }),
                 page.value == 1
                     ? selected("Yangiliklar", AssetIcons.news, showBall.value)
                     : unselected("Yangiliklar", AssetIcons.news, () {
-                  controller.jumpToPage(1);
-                  page.value = 1;
-                  showBall.value = true;
-                  x.value = -0.2;
-                }),
+                        controller.jumpToPage(1);
+                        page.value = 1;
+                        showBall.value = true;
+                        x.value = -0.2;
+                      }),
                 page.value == 2
                     ? selected("Musobaqalar", AssetIcons.league, showBall.value)
                     : unselected("Musobaqalar", AssetIcons.league, () {
-                  controller.jumpToPage(2);
-                  page.value = 2;
-                  showBall.value = true;
-                  x.value = 0.32;
-                }),
+                        controller.jumpToPage(2);
+                        page.value = 2;
+                        showBall.value = true;
+                        x.value = 0.32;
+                      }),
                 page.value == 3
                     ? selected("TV", AssetIcons.tv, showBall.value)
                     : unselected("TV", AssetIcons.tv, () {
-                  controller.jumpToPage(3);
-                  page.value = 3;
-                  showBall.value = true;
-                  x.value = 0.75;
-                }),
+                        controller.jumpToPage(3);
+                        page.value = 3;
+                        showBall.value = true;
+                        x.value = 0.75;
+                      }),
               ],
             ),
           ),
@@ -150,10 +155,10 @@ class AnimatedBall extends StatelessWidget {
       alignment: Alignment(x.value, 0.0),
       child: showBall.value
           ? const ImageIcon(
-        AssetImage(AssetIcons.ball),
-        color: mainColor,
-        size: 20,
-      )
+              AssetImage(AssetIcons.ball),
+              color: mainColor,
+              size: 20,
+            )
           : HBox(0.0),
     );
   }

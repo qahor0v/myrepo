@@ -135,165 +135,174 @@ class _HomeMatchWidgetState extends ConsumerState<HomeMatchWidget> {
               );
             } else {
               final event = events[index - 1];
-              return Container(
-                margin: const EdgeInsets.only(
-                  top: 4.0,
-                  bottom: 8.0,
-                ),
-                padding: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  color: kDarkColor,
-                ),
-                //height: 72,
-                width: double.infinity,
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        WBox(8.0),
-                        Expanded(
-                          child: Text(
-                            event.league_name,
-                            style: GoogleFonts.robotoMono(
-                              color: mainColor,
-                              fontSize: 14,
-                            ),
-                            maxLines: 1,
-                          ),
-                        ),
-                        WBox(16.0),
-                        if (event.match_status.isEmpty)
-                          Row(
-                            children: [
-                              const Icon(
-                                IconlyLight.calendar,
-                                color: Colors.grey,
-                                size: 20,
+              return InkWell(
+                splashColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                onTap: () {
+                  go(context, OpenMatchPage(event: event));
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(
+                    top: 4.0,
+                    bottom: 8.0,
+                  ),
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.0),
+                    color: kDarkColor,
+                  ),
+                  //height: 72,
+                  width: double.infinity,
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          WBox(8.0),
+                          Expanded(
+                            child: Text(
+                              event.league_name,
+                              style: GoogleFonts.robotoMono(
+                                color: mainColor,
+                                fontSize: 14,
                               ),
-                              WBox(4.0),
-                              Text(
-                                "${event.match_date} | ${TimeParser.toLocal(event.match_time)}",
-                                style: GoogleFonts.robotoMono(
+                              maxLines: 1,
+                            ),
+                          ),
+                          WBox(16.0),
+                          if (event.match_status.isEmpty)
+                            Row(
+                              children: [
+                                const Icon(
+                                  IconlyLight.calendar,
                                   color: Colors.grey,
-                                  fontSize: 12,
+                                  size: 20,
                                 ),
-                                maxLines: 1,
-                              ),
-                            ],
-                          ),
-                        if (matchStatus(event.match_status).code == 100)
-                          Text(
-                            "Yakunlangan",
-                            style: GoogleFonts.robotoMono(
-                              color: Colors.greenAccent,
-                              fontSize: 12,
-                            ),
-                            maxLines: 1,
-                          ),
-                        if (matchStatus(event.match_status).code == 1)
-                          Text(
-                            event.match_status.length <= 5 &&
-                                    event.match_status.isNotEmpty
-                                ? "${event.match_status}'"
-                                : event.match_status,
-                            style: GoogleFonts.robotoMono(
-                              color: Colors.greenAccent,
-                              fontSize: 12,
-                            ),
-                            maxLines: 1,
-                          ),
-                        WBox(8.0),
-                      ],
-                    ),
-                    HBox(8.0),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  event.match_hometeam_name,
-                                  textAlign: TextAlign.center,
+                                WBox(4.0),
+                                Text(
+                                  "${event.match_date} | ${TimeParser.toLocal(event.match_time)}",
+                                  style: GoogleFonts.robotoMono(
+                                    color: Colors.grey,
+                                    fontSize: 12,
+                                  ),
                                   maxLines: 1,
-                                  style: GoogleFonts.heebo(
-                                    color: Colors.white,
-                                    fontSize: 16,
+                                ),
+                              ],
+                            ),
+                          if (matchStatus(event.match_status).code == 100)
+                            Text(
+                              "Yakunlangan",
+                              style: GoogleFonts.robotoMono(
+                                color: Colors.greenAccent,
+                                fontSize: 12,
+                              ),
+                              maxLines: 1,
+                            ),
+                          if (matchStatus(event.match_status).code == 1)
+                            Text(
+                              event.match_status.length <= 5 &&
+                                      event.match_status.isNotEmpty
+                                  ? "${event.match_status}'"
+                                  : event.match_status,
+                              style: GoogleFonts.robotoMono(
+                                color: Colors.greenAccent,
+                                fontSize: 12,
+                              ),
+                              maxLines: 1,
+                            ),
+                          WBox(8.0),
+                        ],
+                      ),
+                      HBox(8.0),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    event.match_hometeam_name,
+                                    textAlign: TextAlign.center,
+                                    maxLines: 1,
+                                    style: GoogleFonts.heebo(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              WBox(8.0),
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(40),
-                                child: CachedNetworkImage(
-                                  height: 40,
-                                  width: 40,
-                                  fit: BoxFit.cover,
-                                  imageUrl: event.team_home_badge,
+                                WBox(8.0),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(40),
+                                  child: CachedNetworkImage(
+                                    height: 40,
+                                    width: 40,
+                                    fit: BoxFit.cover,
+                                    imageUrl: event.team_home_badge,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        WBox(12.0),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            // Text(
-                            //   "24.08.2023",
-                            //   style: GoogleFonts.poppins(
-                            //     color: Colors.white,
-                            //   ),
-                            // ),
+                          WBox(12.0),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              // Text(
+                              //   "24.08.2023",
+                              //   style: GoogleFonts.poppins(
+                              //     color: Colors.white,
+                              //   ),
+                              // ),
 
-                            if (event.match_hometeam_ft_score.isEmpty)
-                              Text(
-                                "VS",
-                                style: GoogleFonts.oswald(
-                                    color: mainColor, fontSize: 22),
-                              )
-                            else
-                              Text(
-                                "${event.match_hometeam_ft_score} : ${event.match_awayteam_ft_score}",
-                                style: GoogleFonts.oswald(
-                                    color: mainColor, fontSize: 22),
-                              ),
-                          ],
-                        ),
-                        WBox(12.0),
-                        Expanded(
-                          child: Row(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(40),
-                                child: CachedNetworkImage(
-                                  height: 40,
-                                  width: 40,
-                                  fit: BoxFit.cover,
-                                  imageUrl: event.team_away_badge,
+                              if (event.match_hometeam_score.isEmpty)
+                                Text(
+                                  "VS",
+                                  style: GoogleFonts.oswald(
+                                      color: mainColor, fontSize: 22),
+                                )
+                              else
+                                Text(
+                                  "${event.match_hometeam_score} : ${event.match_awayteam_score}",
+                                  style: GoogleFonts.oswald(
+                                      color: mainColor, fontSize: 22),
                                 ),
-                              ),
-                              WBox(8.0),
-                              Expanded(
-                                child: Text(
-                                  event.match_awayteam_name,
-                                  textAlign: TextAlign.center,
-                                  maxLines: 1,
-                                  style: GoogleFonts.heebo(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
                             ],
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                          WBox(12.0),
+                          Expanded(
+                            child: Row(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(40),
+                                  child: CachedNetworkImage(
+                                    height: 40,
+                                    width: 40,
+                                    fit: BoxFit.cover,
+                                    imageUrl: event.team_away_badge,
+                                  ),
+                                ),
+                                WBox(8.0),
+                                Expanded(
+                                  child: Text(
+                                    event.match_awayteam_name,
+                                    textAlign: TextAlign.center,
+                                    maxLines: 1,
+                                    style: GoogleFonts.heebo(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               );
             }

@@ -76,6 +76,16 @@ class OpenMatchPage extends HookConsumerWidget {
                     WBox(16.0),
                     Column(
                       children: [
+                        if (event.match_hometeam_ft_score.isNotEmpty)
+                          Text(
+                            "${event.match_hometeam_ft_score} : ${event.match_awayteam_ft_score}",
+                            style: GoogleFonts.roboto(
+                              color: mainColor,
+                              fontSize: 32,
+                              fontWeight: FontWeight.w800,
+                            ),
+                            maxLines: 1,
+                          ),
                         if (event.match_status.isEmpty)
                           Column(
                             children: [
@@ -271,6 +281,7 @@ class OpenMatchPage extends HookConsumerWidget {
                 HBox(24.0),
                 SizedBox(
                   child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
                         CustomTabBarButton(
@@ -294,92 +305,60 @@ class OpenMatchPage extends HookConsumerWidget {
                             tabIndex.value = 2;
                           },
                         ),
+                        CustomTabBarButton(
+                          title: "Videolar",
+                          isSelected: tabIndex.value == 3,
+                          onTap: () {
+                            tabIndex.value = 3;
+                          },
+                        ),
                       ],
                     ),
                   ),
                 ),
                 HBox(24.0),
-                ...[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.sports_soccer,
-                        color: mainColor,
+                if (tabIndex.value == 0)
+                  ...[
+                    if (event.goalscorer.isNotEmpty)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.sports_soccer,
+                            color: mainColor,
+                          ),
+                          WBox(8.0),
+                          const Text(
+                            "Gollar",
+                            style: TextStyle(
+                              color: mainColor,
+                              fontSize: 18,
+                            ),
+                          )
+                        ],
                       ),
-                      WBox(8.0),
-                      const Text(
-                        "Gollar",
-                        style: TextStyle(
-                          color: mainColor,
-                          fontSize: 18,
-                        ),
-                      )
-                    ],
-                  ),
-                  HBox(8.0),
-                  ...event.goalscorer.map(
-                    (e) {
-                      return Padding(
-                        padding: const EdgeInsets.only(
-                          left: 16,
-                          right: 16,
-                          top: 8.0,
-                          bottom: 16.0,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: e.home_scorer.isEmpty
-                              ? MainAxisAlignment.end
-                              : MainAxisAlignment.start,
-                          children: [
-                            WBox(32),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "${e.time}'",
-                                  style: const TextStyle(
-                                    color: Colors.white70,
-                                    fontFamily: fontFamily2,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                HBox(4.0),
-                                Text(
-                                  e.score,
-                                  style: const TextStyle(
-                                    color: mainColor,
-                                    fontFamily: fontFamily,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                HBox(8.0),
-                                if (e.away_scorer.isNotEmpty)
+                    HBox(8.0),
+                    ...event.goalscorer.map(
+                      (e) {
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                            left: 16,
+                            right: 16,
+                            top: 8.0,
+                            bottom: 16.0,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: e.home_scorer.isEmpty
+                                ? MainAxisAlignment.end
+                                : MainAxisAlignment.start,
+                            children: [
+                              WBox(32),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
                                   Text(
-                                    e.away_scorer,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: fontFamily2,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                if (e.home_scorer.isNotEmpty)
-                                  Text(
-                                    e.home_scorer,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: fontFamily2,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                HBox(4.0),
-                                if (e.away_assist.isNotEmpty)
-                                  Text(
-                                    e.away_assist,
+                                    "${e.time}'",
                                     style: const TextStyle(
                                       color: Colors.white70,
                                       fontFamily: fontFamily2,
@@ -387,9 +366,106 @@ class OpenMatchPage extends HookConsumerWidget {
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                                if (e.home_assist.isNotEmpty)
+                                  HBox(4.0),
                                   Text(
-                                    e.home_assist,
+                                    e.score,
+                                    style: const TextStyle(
+                                      color: mainColor,
+                                      fontFamily: fontFamily,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  HBox(8.0),
+                                  if (e.away_scorer.isNotEmpty)
+                                    Text(
+                                      e.away_scorer,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: fontFamily2,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  if (e.home_scorer.isNotEmpty)
+                                    Text(
+                                      e.home_scorer,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: fontFamily2,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  HBox(4.0),
+                                  if (e.away_assist.isNotEmpty)
+                                    Text(
+                                      e.away_assist,
+                                      style: const TextStyle(
+                                        color: Colors.white70,
+                                        fontFamily: fontFamily2,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  if (e.home_assist.isNotEmpty)
+                                    Text(
+                                      e.home_assist,
+                                      style: const TextStyle(
+                                        color: Colors.white70,
+                                        fontFamily: fontFamily2,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                ],
+                              ),
+                              WBox(32),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                    HBox(24.0),
+                    if (event.cards.isNotEmpty)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.sports,
+                            color: mainColor,
+                          ),
+                          WBox(8.0),
+                          const Text(
+                            "Ogohlantirishlar / Kartochkalar",
+                            style: TextStyle(
+                              color: mainColor,
+                              fontSize: 18,
+                            ),
+                          )
+                        ],
+                      ),
+                    HBox(16.0),
+                    ...event.cards.map(
+                      (e) {
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                            left: 16,
+                            right: 16,
+                            top: 8.0,
+                            bottom: 16.0,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: e.home_fault.isEmpty
+                                ? MainAxisAlignment.end
+                                : MainAxisAlignment.start,
+                            children: [
+                              WBox(32),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "${e.time}'",
                                     style: const TextStyle(
                                       color: Colors.white70,
                                       fontFamily: fontFamily2,
@@ -397,99 +473,329 @@ class OpenMatchPage extends HookConsumerWidget {
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                              ],
+                                  HBox(8.0),
+                                  Container(
+                                    height: 24,
+                                    width: 16,
+                                    color: e.card == "yellow card"
+                                        ? Colors.yellow
+                                        : Colors.red,
+                                  ),
+                                  HBox(8.0),
+                                  if (e.home_fault.isNotEmpty)
+                                    Text(
+                                      e.home_fault,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: fontFamily2,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  if (e.away_fault.isNotEmpty)
+                                    Text(
+                                      e.away_fault,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: fontFamily2,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                ],
+                              ),
+                              WBox(32),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                    HBox(24.0),
+                    if (event.substitutions.home.isNotEmpty)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.change_circle_outlined,
+                            color: mainColor,
+                          ),
+                          WBox(8.0),
+                          const Text(
+                            "O'zgarishlar",
+                            style: TextStyle(
+                              color: mainColor,
+                              fontSize: 18,
                             ),
-                            WBox(32),
+                          )
+                        ],
+                      ),
+                    HBox(16.0),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [
+                              ...event.substitutions.home.map((e) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 16),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        "${e.time}'",
+                                        style: const TextStyle(
+                                          color: Colors.white70,
+                                          fontFamily: fontFamily2,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      HBox(4.0),
+                                      Text(
+                                        e.substitution,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: fontFamily,
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                      HBox(8.0),
+                                    ],
+                                  ),
+                                );
+                              }),
+                            ],
+                          ),
+                        ),
+                        WBox(24.0),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              ...event.substitutions.away.map((e) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 16),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        "${e.time}'",
+                                        style: const TextStyle(
+                                          color: Colors.white70,
+                                          fontFamily: fontFamily2,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      HBox(4.0),
+                                      Text(
+                                        e.substitution,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: fontFamily,
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                      HBox(8.0),
+                                    ],
+                                  ),
+                                );
+                              }),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ].map((e) => e)
+                else if (tabIndex.value == 1)
+                  ...event.statistics.map((e) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 16.0),
+                      child: Row(
+                        children: [
+                          Text(
+                            e.home,
+                            style: const TextStyle(
+                              color: mainColor,
+                              fontSize: 16,
+                              fontFamily: fontFamily,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          const Spacer(),
+                          Text(
+                            e.type,
+                            style: GoogleFonts.ubuntu(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const Spacer(),
+                          Text(
+                            e.away,
+                            style: const TextStyle(
+                              color: mainColor,
+                              fontSize: 16,
+                              fontFamily: fontFamily,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  })
+                else if (tabIndex.value == 2)
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (event.lineup.home.starting_lineups.isNotEmpty)
+                              Text(
+                                "Asosiy tarkib",
+                                style: GoogleFonts.roboto(
+                                  color: mainColor,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            if (event.lineup.home.starting_lineups.isNotEmpty)
+                              HBox(8.0),
+                            if (event.lineup.home.starting_lineups.isNotEmpty)
+                              ...event.lineup.home.starting_lineups.map((e) {
+                                return Text(
+                                  "${e.lineup_number}.${e.lineup_player}",
+                                  style:
+                                      GoogleFonts.roboto(color: Colors.white),
+                                  maxLines: 1,
+                                  textAlign: TextAlign.left,
+                                );
+                              }),
+                            if (event.lineup.home.starting_lineups.isNotEmpty)
+                              HBox(16.0),
+                            if (event.lineup.home.coach.isNotEmpty)
+                              Text(
+                                "Murabbiy",
+                                style: GoogleFonts.roboto(
+                                  color: mainColor,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            if (event.lineup.home.coach.isNotEmpty) HBox(8.0),
+                            if (event.lineup.home.coach.isNotEmpty)
+                              ...event.lineup.home.coach.map((e) {
+                                return Text(
+                                  e.lineup_player,
+                                  style:
+                                      GoogleFonts.roboto(color: Colors.white),
+                                  maxLines: 1,
+                                  textAlign: TextAlign.left,
+                                );
+                              }),
+                            if (event.lineup.home.coach.isNotEmpty) HBox(16.0),
+                            if (event.lineup.home.substitutes.isNotEmpty)
+                              Text(
+                                "Zaxiradagilar",
+                                style: GoogleFonts.roboto(
+                                  color: mainColor,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            if (event.lineup.home.substitutes.isNotEmpty)
+                              HBox(8.0),
+                            if (event.lineup.home.substitutes.isNotEmpty)
+                              ...event.lineup.home.substitutes.map((e) {
+                                return Text(
+                                  "${e.lineup_number}.${e.lineup_player}",
+                                  style:
+                                      GoogleFonts.roboto(color: Colors.white),
+                                  maxLines: 1,
+                                  textAlign: TextAlign.left,
+                                );
+                              }),
                           ],
                         ),
-                      );
-                    },
-                  ),
-                  HBox(24.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.sports,
-                        color: mainColor,
                       ),
-                      WBox(8.0),
-                      const Text(
-                        "Ogohlantirishlar / Kartochkalar",
-                        style: TextStyle(
-                          color: mainColor,
-                          fontSize: 18,
+                      WBox(24.0),
+
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            if (event.lineup.away.starting_lineups.isNotEmpty)
+                              Text(
+                                "Asosiy tarkib",
+                                style: GoogleFonts.roboto(
+                                  color: mainColor,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            if (event.lineup.away.starting_lineups.isNotEmpty)
+                              HBox(8.0),
+                            if (event.lineup.away.starting_lineups.isNotEmpty)
+                              ...event.lineup.away.starting_lineups.map((e) {
+                                return Text(
+                                  "${e.lineup_number}.${e.lineup_player}",
+                                  style:
+                                  GoogleFonts.roboto(color: Colors.white),
+                                  maxLines: 1,
+                                  textAlign: TextAlign.right,
+                                );
+                              }),
+                            if (event.lineup.away.starting_lineups.isNotEmpty)
+                              HBox(16.0),
+                            if (event.lineup.away.coach.isNotEmpty)
+                              Text(
+                                "Murabbiy",
+                                style: GoogleFonts.roboto(
+                                  color: mainColor,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            if (event.lineup.away.coach.isNotEmpty) HBox(8.0),
+                            if (event.lineup.away.coach.isNotEmpty)
+                              ...event.lineup.away.coach.map((e) {
+                                return Text(
+                                  e.lineup_player,
+                                  style:
+                                  GoogleFonts.roboto(color: Colors.white),
+                                  maxLines: 1,
+                                  textAlign: TextAlign.left,
+                                );
+                              }),
+                            if (event.lineup.away.coach.isNotEmpty) HBox(16.0),
+                            if (event.lineup.away.substitutes.isNotEmpty)
+                              Text(
+                                "Zaxiradagilar",
+                                style: GoogleFonts.roboto(
+                                  color: mainColor,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            if (event.lineup.away.substitutes.isNotEmpty)
+                              HBox(8.0),
+                            if (event.lineup.away.substitutes.isNotEmpty)
+                              ...event.lineup.away.substitutes.map((e) {
+                                return Text(
+                                  "${e.lineup_number}.${e.lineup_player}",
+                                  style:
+                                  GoogleFonts.roboto(color: Colors.white),
+                                  maxLines: 1,
+                                  textAlign: TextAlign.right,
+                                );
+                              }),
+                          ],
                         ),
                       )
                     ],
-                  ),
-                  HBox(16.0),
-                  ...event.cards.map(
-                    (e) {
-                      return Padding(
-                        padding: const EdgeInsets.only(
-                          left: 16,
-                          right: 16,
-                          top: 8.0,
-                          bottom: 16.0,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: e.home_fault.isEmpty
-                              ? MainAxisAlignment.end
-                              : MainAxisAlignment.start,
-                          children: [
-                            WBox(32),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "${e.time}'",
-                                  style: const TextStyle(
-                                    color: Colors.white70,
-                                    fontFamily: fontFamily2,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                HBox(8.0),
-                                Container(
-                                  height: 24,
-                                  width: 16,
-                                  color: e.card == "yellow card"
-                                      ? Colors.yellow
-                                      : Colors.red,
-                                ),
-                                HBox(8.0),
-                                if (e.home_fault.isNotEmpty)
-                                  Text(
-                                    e.home_fault,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: fontFamily2,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                if (e.away_fault.isNotEmpty)
-                                  Text(
-                                    e.away_fault,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: fontFamily2,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                              ],
-                            ),
-                            WBox(32),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ].map((e) => e),
+                  )
+                else Text("")
               ],
             ),
           ),

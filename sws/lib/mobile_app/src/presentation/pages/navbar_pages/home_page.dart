@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:iconly/iconly.dart';
- import 'package:sws/mobile_app/src/config/themes/app_colors.dart';
+import 'package:sws/mobile_app/src/config/themes/app_colors.dart';
 import 'package:sws/mobile_app/src/domain/models/score_models/match_event_model/match.dart';
 import 'package:sws/mobile_app/src/domain/repository/score_services/score_services.dart';
 import 'package:sws/mobile_app/src/presentation/screens/helpers/sized_box.dart';
@@ -14,11 +14,18 @@ import 'package:sws/mobile_app/src/presentation/screens/home_screens/match_widge
 import 'package:sws/mobile_app/src/presentation/screens/home_screens/slider_screen.dart';
 import 'package:sws/mobile_app/src/utils/constants/score_sources.dart';
 
-class HomePage extends HookConsumerWidget {
+class HomePage extends StatefulHookConsumerWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context, ref) {
+  ConsumerState<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends ConsumerState<HomePage>
+    with AutomaticKeepAliveClientMixin<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
     final matchEvents = useState<List<MatchEvent>>([]);
 
     return Scaffold(
@@ -66,7 +73,6 @@ class HomePage extends HookConsumerWidget {
         child: CustomScrollView(
           slivers: [
             const HomeSliderScreen(),
-
             HomeMatchWidget(eventsHelper: matchEvents),
             HomeCategoryButtonWidget(
               onTap: () {},
@@ -84,4 +90,7 @@ class HomePage extends HookConsumerWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

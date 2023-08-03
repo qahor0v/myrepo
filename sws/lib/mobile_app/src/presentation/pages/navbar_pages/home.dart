@@ -7,11 +7,18 @@ import 'package:sws/mobile_app/src/presentation/pages/navbar_pages/news_page.dar
 import 'package:sws/mobile_app/src/presentation/pages/navbar_pages/tv_page.dart';
 import 'package:sws/mobile_app/src/presentation/screens/navbar_screen.dart';
 
-class Home extends HookConsumerWidget {
+class Home extends StatefulHookConsumerWidget {
   const Home({super.key});
 
   @override
-  Widget build(BuildContext context, ref) {
+  ConsumerState<Home> createState() => _HomeState();
+}
+
+class _HomeState extends ConsumerState<Home>
+    with AutomaticKeepAliveClientMixin<Home> {
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
     final controller = usePageController();
     final page = useState<int>(0);
     final x = useState<double>(-0.7);
@@ -53,4 +60,8 @@ class Home extends HookConsumerWidget {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

@@ -4,12 +4,14 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:iconly/iconly.dart';
+import 'package:lottie/lottie.dart';
 import 'package:sws/mobile_app/src/config/themes/app_colors.dart';
 import 'package:sws/mobile_app/src/config/themes/fonts.dart';
 import 'package:sws/mobile_app/src/domain/models/score_models/match_event_model/match.dart';
 import 'package:sws/mobile_app/src/presentation/screens/helpers/sized_box.dart';
 import 'package:sws/mobile_app/src/presentation/screens/shimmers/app_shimmer.dart';
 import 'package:sws/mobile_app/src/utils/constants/asset_icons.dart';
+import 'package:sws/mobile_app/src/utils/constants/asset_paths.dart';
 import 'package:sws/mobile_app/src/utils/extensions/match_status.dart';
 import 'package:sws/mobile_app/src/utils/extensions/time_parsers.dart';
 
@@ -319,6 +321,11 @@ class OpenMatchPage extends HookConsumerWidget {
                 HBox(24.0),
                 if (tabIndex.value == 0)
                   ...[
+                    if (event.goalscorer.isEmpty &&
+                        event.cards.isEmpty &&
+                        event.substitutions.away.isEmpty &&
+                        event.substitutions.home.isEmpty)
+                      Lottie.asset(AssetPaths.empty),
                     if (event.goalscorer.isNotEmpty)
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -605,197 +612,206 @@ class OpenMatchPage extends HookConsumerWidget {
                     ),
                   ].map((e) => e)
                 else if (tabIndex.value == 1)
-                  ...event.statistics.map((e) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 16.0),
-                      child: Row(
-                        children: [
-                          Text(
-                            e.home,
-                            style: const TextStyle(
-                              color: mainColor,
-                              fontSize: 16,
-                              fontFamily: fontFamily,
-                              fontWeight: FontWeight.w400,
+                  if (event.statistics.isNotEmpty)
+                    ...event.statistics.map((e) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              e.home,
+                              style: const TextStyle(
+                                color: mainColor,
+                                fontSize: 16,
+                                fontFamily: fontFamily,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
-                          ),
-                          const Spacer(),
-                          Text(
-                            e.type,
-                            style: GoogleFonts.ubuntu(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
+                            const Spacer(),
+                            Text(
+                              e.type,
+                              style: GoogleFonts.ubuntu(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
-                          ),
-                          const Spacer(),
-                          Text(
-                            e.away,
-                            style: const TextStyle(
-                              color: mainColor,
-                              fontSize: 16,
-                              fontFamily: fontFamily,
-                              fontWeight: FontWeight.w400,
+                            const Spacer(),
+                            Text(
+                              e.away,
+                              style: const TextStyle(
+                                color: mainColor,
+                                fontSize: 16,
+                                fontFamily: fontFamily,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    );
-                  })
+                          ],
+                        ),
+                      );
+                    })
+                  else
+                    Lottie.asset(AssetPaths.empty)
                 else if (tabIndex.value == 2)
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (event.lineup.home.starting_lineups.isNotEmpty)
-                              Text(
-                                "Asosiy tarkib",
-                                style: GoogleFonts.roboto(
-                                  color: mainColor,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w700,
+                  if (event.lineup.home.starting_lineups.isNotEmpty &&
+                      event.lineup.away.starting_lineups.isNotEmpty)
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (event.lineup.home.starting_lineups.isNotEmpty)
+                                Text(
+                                  "Asosiy tarkib",
+                                  style: GoogleFonts.roboto(
+                                    color: mainColor,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w700,
+                                  ),
                                 ),
-                              ),
-                            if (event.lineup.home.starting_lineups.isNotEmpty)
-                              HBox(8.0),
-                            if (event.lineup.home.starting_lineups.isNotEmpty)
-                              ...event.lineup.home.starting_lineups.map((e) {
-                                return Text(
-                                  "${e.lineup_number}.${e.lineup_player}",
-                                  style:
-                                      GoogleFonts.roboto(color: Colors.white),
-                                  maxLines: 1,
-                                  textAlign: TextAlign.left,
-                                );
-                              }),
-                            if (event.lineup.home.starting_lineups.isNotEmpty)
-                              HBox(16.0),
-                            if (event.lineup.home.coach.isNotEmpty)
-                              Text(
-                                "Murabbiy",
-                                style: GoogleFonts.roboto(
-                                  color: mainColor,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w700,
+                              if (event.lineup.home.starting_lineups.isNotEmpty)
+                                HBox(8.0),
+                              if (event.lineup.home.starting_lineups.isNotEmpty)
+                                ...event.lineup.home.starting_lineups.map((e) {
+                                  return Text(
+                                    "${e.lineup_number}.${e.lineup_player}",
+                                    style:
+                                        GoogleFonts.roboto(color: Colors.white),
+                                    maxLines: 1,
+                                    textAlign: TextAlign.left,
+                                  );
+                                }),
+                              if (event.lineup.home.starting_lineups.isNotEmpty)
+                                HBox(16.0),
+                              if (event.lineup.home.coach.isNotEmpty)
+                                Text(
+                                  "Murabbiy",
+                                  style: GoogleFonts.roboto(
+                                    color: mainColor,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w700,
+                                  ),
                                 ),
-                              ),
-                            if (event.lineup.home.coach.isNotEmpty) HBox(8.0),
-                            if (event.lineup.home.coach.isNotEmpty)
-                              ...event.lineup.home.coach.map((e) {
-                                return Text(
-                                  e.lineup_player,
-                                  style:
-                                      GoogleFonts.roboto(color: Colors.white),
-                                  maxLines: 1,
-                                  textAlign: TextAlign.left,
-                                );
-                              }),
-                            if (event.lineup.home.coach.isNotEmpty) HBox(16.0),
-                            if (event.lineup.home.substitutes.isNotEmpty)
-                              Text(
-                                "Zaxiradagilar",
-                                style: GoogleFonts.roboto(
-                                  color: mainColor,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w700,
+                              if (event.lineup.home.coach.isNotEmpty) HBox(8.0),
+                              if (event.lineup.home.coach.isNotEmpty)
+                                ...event.lineup.home.coach.map((e) {
+                                  return Text(
+                                    e.lineup_player,
+                                    style:
+                                        GoogleFonts.roboto(color: Colors.white),
+                                    maxLines: 1,
+                                    textAlign: TextAlign.left,
+                                  );
+                                }),
+                              if (event.lineup.home.coach.isNotEmpty)
+                                HBox(16.0),
+                              if (event.lineup.home.substitutes.isNotEmpty)
+                                Text(
+                                  "Zaxiradagilar",
+                                  style: GoogleFonts.roboto(
+                                    color: mainColor,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w700,
+                                  ),
                                 ),
-                              ),
-                            if (event.lineup.home.substitutes.isNotEmpty)
-                              HBox(8.0),
-                            if (event.lineup.home.substitutes.isNotEmpty)
-                              ...event.lineup.home.substitutes.map((e) {
-                                return Text(
-                                  "${e.lineup_number}.${e.lineup_player}",
-                                  style:
-                                      GoogleFonts.roboto(color: Colors.white),
-                                  maxLines: 1,
-                                  textAlign: TextAlign.left,
-                                );
-                              }),
-                          ],
+                              if (event.lineup.home.substitutes.isNotEmpty)
+                                HBox(8.0),
+                              if (event.lineup.home.substitutes.isNotEmpty)
+                                ...event.lineup.home.substitutes.map((e) {
+                                  return Text(
+                                    "${e.lineup_number}.${e.lineup_player}",
+                                    style:
+                                        GoogleFonts.roboto(color: Colors.white),
+                                    maxLines: 1,
+                                    textAlign: TextAlign.left,
+                                  );
+                                }),
+                            ],
+                          ),
                         ),
-                      ),
-                      WBox(24.0),
-
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            if (event.lineup.away.starting_lineups.isNotEmpty)
-                              Text(
-                                "Asosiy tarkib",
-                                style: GoogleFonts.roboto(
-                                  color: mainColor,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w700,
+                        WBox(24.0),
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              if (event.lineup.away.starting_lineups.isNotEmpty)
+                                Text(
+                                  "Asosiy tarkib",
+                                  style: GoogleFonts.roboto(
+                                    color: mainColor,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w700,
+                                  ),
                                 ),
-                              ),
-                            if (event.lineup.away.starting_lineups.isNotEmpty)
-                              HBox(8.0),
-                            if (event.lineup.away.starting_lineups.isNotEmpty)
-                              ...event.lineup.away.starting_lineups.map((e) {
-                                return Text(
-                                  "${e.lineup_number}.${e.lineup_player}",
-                                  style:
-                                  GoogleFonts.roboto(color: Colors.white),
-                                  maxLines: 1,
-                                  textAlign: TextAlign.right,
-                                );
-                              }),
-                            if (event.lineup.away.starting_lineups.isNotEmpty)
-                              HBox(16.0),
-                            if (event.lineup.away.coach.isNotEmpty)
-                              Text(
-                                "Murabbiy",
-                                style: GoogleFonts.roboto(
-                                  color: mainColor,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w700,
+                              if (event.lineup.away.starting_lineups.isNotEmpty)
+                                HBox(8.0),
+                              if (event.lineup.away.starting_lineups.isNotEmpty)
+                                ...event.lineup.away.starting_lineups.map((e) {
+                                  return Text(
+                                    "${e.lineup_number}.${e.lineup_player}",
+                                    style:
+                                        GoogleFonts.roboto(color: Colors.white),
+                                    maxLines: 1,
+                                    textAlign: TextAlign.right,
+                                  );
+                                }),
+                              if (event.lineup.away.starting_lineups.isNotEmpty)
+                                HBox(16.0),
+                              if (event.lineup.away.coach.isNotEmpty)
+                                Text(
+                                  "Murabbiy",
+                                  style: GoogleFonts.roboto(
+                                    color: mainColor,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w700,
+                                  ),
                                 ),
-                              ),
-                            if (event.lineup.away.coach.isNotEmpty) HBox(8.0),
-                            if (event.lineup.away.coach.isNotEmpty)
-                              ...event.lineup.away.coach.map((e) {
-                                return Text(
-                                  e.lineup_player,
-                                  style:
-                                  GoogleFonts.roboto(color: Colors.white),
-                                  maxLines: 1,
-                                  textAlign: TextAlign.left,
-                                );
-                              }),
-                            if (event.lineup.away.coach.isNotEmpty) HBox(16.0),
-                            if (event.lineup.away.substitutes.isNotEmpty)
-                              Text(
-                                "Zaxiradagilar",
-                                style: GoogleFonts.roboto(
-                                  color: mainColor,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w700,
+                              if (event.lineup.away.coach.isNotEmpty) HBox(8.0),
+                              if (event.lineup.away.coach.isNotEmpty)
+                                ...event.lineup.away.coach.map((e) {
+                                  return Text(
+                                    e.lineup_player,
+                                    style:
+                                        GoogleFonts.roboto(color: Colors.white),
+                                    maxLines: 1,
+                                    textAlign: TextAlign.left,
+                                  );
+                                }),
+                              if (event.lineup.away.coach.isNotEmpty)
+                                HBox(16.0),
+                              if (event.lineup.away.substitutes.isNotEmpty)
+                                Text(
+                                  "Zaxiradagilar",
+                                  style: GoogleFonts.roboto(
+                                    color: mainColor,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w700,
+                                  ),
                                 ),
-                              ),
-                            if (event.lineup.away.substitutes.isNotEmpty)
-                              HBox(8.0),
-                            if (event.lineup.away.substitutes.isNotEmpty)
-                              ...event.lineup.away.substitutes.map((e) {
-                                return Text(
-                                  "${e.lineup_number}.${e.lineup_player}",
-                                  style:
-                                  GoogleFonts.roboto(color: Colors.white),
-                                  maxLines: 1,
-                                  textAlign: TextAlign.right,
-                                );
-                              }),
-                          ],
-                        ),
-                      )
-                    ],
-                  )
-                else Text("")
+                              if (event.lineup.away.substitutes.isNotEmpty)
+                                HBox(8.0),
+                              if (event.lineup.away.substitutes.isNotEmpty)
+                                ...event.lineup.away.substitutes.map((e) {
+                                  return Text(
+                                    "${e.lineup_number}.${e.lineup_player}",
+                                    style:
+                                        GoogleFonts.roboto(color: Colors.white),
+                                    maxLines: 1,
+                                    textAlign: TextAlign.right,
+                                  );
+                                }),
+                            ],
+                          ),
+                        )
+                      ],
+                    )
+                  else
+                    Lottie.asset(AssetPaths.empty)
+                else
+                  Lottie.asset(AssetPaths.empty),
               ],
             ),
           ),

@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:iconly/iconly.dart';
+import 'package:sws/mobile_app/src/config/themes/app_colors.dart';
 import 'package:sws/mobile_app/src/config/themes/fonts.dart';
 import 'package:sws/mobile_app/src/domain/models/score_models/match_event_model/match.dart';
 import 'package:sws/mobile_app/src/presentation/screens/helpers/sized_box.dart';
@@ -21,6 +23,7 @@ class OpenMatchPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
+    final tabIndex = useState(0);
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -191,7 +194,7 @@ class OpenMatchPage extends HookConsumerWidget {
                   children: [
                     const Icon(
                       Icons.tour,
-                      color: Colors.greenAccent,
+                      color: mainColor,
                     ),
                     WBox(4.0),
                     Text(
@@ -211,7 +214,7 @@ class OpenMatchPage extends HookConsumerWidget {
                     children: [
                       const Icon(
                         Icons.sports,
-                        color: Colors.greenAccent,
+                        color: mainColor,
                       ),
                       WBox(4.0),
                       const Text(
@@ -241,7 +244,7 @@ class OpenMatchPage extends HookConsumerWidget {
                     children: [
                       const Icon(
                         Icons.stadium_outlined,
-                        color: Colors.greenAccent,
+                        color: mainColor,
                       ),
                       WBox(4.0),
                       const Text(
@@ -265,8 +268,277 @@ class OpenMatchPage extends HookConsumerWidget {
                       ),
                     ],
                   ),
+                HBox(24.0),
+                SizedBox(
+                  child: SingleChildScrollView(
+                    child: Row(
+                      children: [
+                        CustomTabBarButton(
+                          title: "Voqealar",
+                          isSelected: tabIndex.value == 0,
+                          onTap: () {
+                            tabIndex.value = 0;
+                          },
+                        ),
+                        CustomTabBarButton(
+                          title: "Statistika",
+                          isSelected: tabIndex.value == 1,
+                          onTap: () {
+                            tabIndex.value = 1;
+                          },
+                        ),
+                        CustomTabBarButton(
+                          title: "Tarkiblar",
+                          isSelected: tabIndex.value == 2,
+                          onTap: () {
+                            tabIndex.value = 2;
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                HBox(24.0),
+                ...[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.sports_soccer,
+                        color: mainColor,
+                      ),
+                      WBox(8.0),
+                      const Text(
+                        "Gollar",
+                        style: TextStyle(
+                          color: mainColor,
+                          fontSize: 18,
+                        ),
+                      )
+                    ],
+                  ),
+                  HBox(8.0),
+                  ...event.goalscorer.map(
+                    (e) {
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                          left: 16,
+                          right: 16,
+                          top: 8.0,
+                          bottom: 16.0,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: e.home_scorer.isEmpty
+                              ? MainAxisAlignment.end
+                              : MainAxisAlignment.start,
+                          children: [
+                            WBox(32),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "${e.time}'",
+                                  style: const TextStyle(
+                                    color: Colors.white70,
+                                    fontFamily: fontFamily2,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                HBox(4.0),
+                                Text(
+                                  e.score,
+                                  style: const TextStyle(
+                                    color: mainColor,
+                                    fontFamily: fontFamily,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                HBox(8.0),
+                                if (e.away_scorer.isNotEmpty)
+                                  Text(
+                                    e.away_scorer,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: fontFamily2,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                if (e.home_scorer.isNotEmpty)
+                                  Text(
+                                    e.home_scorer,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: fontFamily2,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                HBox(4.0),
+                                if (e.away_assist.isNotEmpty)
+                                  Text(
+                                    e.away_assist,
+                                    style: const TextStyle(
+                                      color: Colors.white70,
+                                      fontFamily: fontFamily2,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                if (e.home_assist.isNotEmpty)
+                                  Text(
+                                    e.home_assist,
+                                    style: const TextStyle(
+                                      color: Colors.white70,
+                                      fontFamily: fontFamily2,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                            WBox(32),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                  HBox(24.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.sports,
+                        color: mainColor,
+                      ),
+                      WBox(8.0),
+                      const Text(
+                        "Ogohlantirishlar / Kartochkalar",
+                        style: TextStyle(
+                          color: mainColor,
+                          fontSize: 18,
+                        ),
+                      )
+                    ],
+                  ),
+                  HBox(16.0),
+                  ...event.cards.map(
+                    (e) {
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                          left: 16,
+                          right: 16,
+                          top: 8.0,
+                          bottom: 16.0,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: e.home_fault.isEmpty
+                              ? MainAxisAlignment.end
+                              : MainAxisAlignment.start,
+                          children: [
+                            WBox(32),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "${e.time}'",
+                                  style: const TextStyle(
+                                    color: Colors.white70,
+                                    fontFamily: fontFamily2,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                HBox(8.0),
+                                Container(
+                                  height: 24,
+                                  width: 16,
+                                  color: e.card == "yellow card"
+                                      ? Colors.yellow
+                                      : Colors.red,
+                                ),
+                                HBox(8.0),
+                                if (e.home_fault.isNotEmpty)
+                                  Text(
+                                    e.home_fault,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: fontFamily2,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                if (e.away_fault.isNotEmpty)
+                                  Text(
+                                    e.away_fault,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: fontFamily2,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                            WBox(32),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ].map((e) => e),
               ],
             ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CustomTabBarButton extends StatelessWidget {
+  final String title;
+  final bool isSelected;
+  final void Function() onTap;
+
+  const CustomTabBarButton({
+    super.key,
+    required this.title,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      focusColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      child: Container(
+        margin: const EdgeInsets.only(right: 8.0),
+        padding: const EdgeInsets.only(
+          left: 16,
+          right: 16,
+          top: 4,
+          bottom: 4,
+        ),
+        decoration: BoxDecoration(
+          color: isSelected ? mainColor : Colors.black,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: mainColor),
+        ),
+        child: Text(
+          title,
+          style: TextStyle(
+            color: isSelected ? Colors.black : mainColor,
+            fontSize: 15,
+            fontWeight: FontWeight.w700,
+            fontFamily: fontFamily2,
           ),
         ),
       ),

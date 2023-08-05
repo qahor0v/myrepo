@@ -4,10 +4,8 @@ class VideoNews {
   String title;
   String banner;
   String createdTime;
-  String author;
   String source;
   String text;
-  bool isPlaylist;
   bool fromYouTube;
   String videoID;
 
@@ -17,10 +15,8 @@ class VideoNews {
     required this.title,
     required this.banner,
     required this.createdTime,
-    required this.author,
     required this.source,
     required this.text,
-    required this.isPlaylist,
     required this.fromYouTube,
     required this.videoID,
   });
@@ -32,10 +28,8 @@ class VideoNews {
       title: json['title'] as String,
       banner: json['banner'] as String,
       createdTime: json['createdTime'] as String,
-      author: json['author'] as String,
       source: json['source'] as String,
       text: json['text'] as String,
-      isPlaylist: json['isPlaylist'] as bool,
       fromYouTube: json['fromYouTube'] as bool,
       videoID: json['videoID'] as String,
     );
@@ -48,10 +42,8 @@ class VideoNews {
       'title': title,
       'banner': banner,
       'createdTime': createdTime,
-      'author': author,
       'source': source,
       'text': text,
-      'isPlaylist': isPlaylist,
       'fromYouTube': fromYouTube,
       'videoID': videoID,
     };

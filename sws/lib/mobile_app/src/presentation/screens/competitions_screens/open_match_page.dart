@@ -659,12 +659,9 @@ class OpenMatchPage extends HookConsumerWidget {
                   if (event.lineup.home.starting_lineups.isNotEmpty &&
                       event.lineup.away.starting_lineups.isNotEmpty)
                     Row(
-<<<<<<< HEAD
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
-=======
->>>>>>> 17cb326275c68b9b1cf10505346d89918c4a9955
-                      children: [
+                        children: [
                         Expanded(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -742,12 +739,8 @@ class OpenMatchPage extends HookConsumerWidget {
                         WBox(24.0),
                         Expanded(
                           child: Column(
-<<<<<<< HEAD
-                            mainAxisAlignment: MainAxisAlignment.start,
-=======
-                            mainAxisAlignment: MainAxisAlignment.end,
->>>>>>> 17cb326275c68b9b1cf10505346d89918c4a9955
-                            crossAxisAlignment: CrossAxisAlignment.end,
+                             mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               if (event.lineup.away.starting_lineups.isNotEmpty)
                                 Text(
@@ -815,11 +808,8 @@ class OpenMatchPage extends HookConsumerWidget {
                                     textAlign: TextAlign.right,
                                   );
                                 }),
-<<<<<<< HEAD
-
-=======
->>>>>>> 17cb326275c68b9b1cf10505346d89918c4a9955
-                            ],
+ 
+                             ],
                           ),
                         )
                       ],

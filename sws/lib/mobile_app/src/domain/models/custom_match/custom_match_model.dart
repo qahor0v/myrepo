@@ -1,11 +1,11 @@
-import 'package:sws/mobile_app/src/domain/models/custom_match/custom_event.dart';
-
 class CustomMatch {
   String id;
   String docID;
+  String home;
+  String away;
   String homeLogo;
   String awayLogo;
-  String leagueLogo;
+  String stage;
   String league;
   String matchStatus;
   String matchTime;
@@ -14,14 +14,14 @@ class CustomMatch {
   String stadium;
   String homeScore;
   String awayScore;
-  List<CustomEvent> events;
+  List<String> events;
 
   CustomMatch({
     required this.id,
     required this.docID,
     required this.homeLogo,
     required this.awayLogo,
-    required this.leagueLogo,
+    required this.stage,
     required this.league,
     required this.matchStatus,
     required this.matchTime,
@@ -31,23 +31,17 @@ class CustomMatch {
     required this.homeScore,
     required this.awayScore,
     required this.events,
+    required this.away,
+    required this.home,
   });
 
   factory CustomMatch.fromJson(Map<String, dynamic> json) {
-    List<CustomEvent> eventsList = [];
-    if (json['events'] != null) {
-      var eventsData = json['events'] as List;
-      eventsList = eventsData
-          .map((eventJson) => CustomEvent.fromJson(eventJson))
-          .toList();
-    }
-
     return CustomMatch(
       id: json['id'] as String,
       docID: json['docID'] as String,
       homeLogo: json['homeLogo'] as String,
       awayLogo: json['awayLogo'] as String,
-      leagueLogo: json['leagueLogo'] as String,
+      stage: json['stage'] as String,
       league: json['league'] as String,
       matchStatus: json['matchStatus'] as String,
       matchTime: json['matchTime'] as String,
@@ -56,19 +50,19 @@ class CustomMatch {
       stadium: json['stadium'] as String,
       homeScore: json['homeScore'] as String,
       awayScore: json['awayScore'] as String,
-      events: eventsList,
+      events: json['events'] as List<String>,
+      home: json['home'] as String,
+      away: json['away'] as String,
     );
   }
 
   Map<String, dynamic> toJson() {
-    List<Map<String, dynamic>> eventsJsonList =
-        events.map((event) => event.toJson()).toList();
     return {
       'id': id,
       'docID': docID,
       'homeLogo': homeLogo,
       'awayLogo': awayLogo,
-      'leagueLogo': leagueLogo,
+      'stage': stage,
       'league': league,
       'matchStatus': matchStatus,
       'matchTime': matchTime,
@@ -77,7 +71,9 @@ class CustomMatch {
       'stadium': stadium,
       'homeScore': homeScore,
       'awayScore': awayScore,
-      'events': eventsJsonList,
+      'events': events,
+      'away': away,
+      'home': home,
     };
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sws/mobile_app/src/config/router/routers.dart';
 import 'package:sws/mobile_app/src/config/themes/app_colors.dart';
+import 'package:sws/mobile_app/src/presentation/pages/intro_pages/splash_page.dart';
 import 'package:sws/mobile_app/src/presentation/pages/navbar_pages/home.dart';
 
 class MyApp extends StatelessWidget {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: mainColor),
         useMaterial3: true,
       ),
-      home: const Home(),
+      home: const SplashPage(),
       routes: AppRouter.routers,
     );
   }

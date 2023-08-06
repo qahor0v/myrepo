@@ -8,6 +8,7 @@ import 'package:sws/mobile_app/src/presentation/pages/navbar_pages/tv_page.dart'
 import 'package:sws/mobile_app/src/presentation/screens/navbar_screen.dart';
 
 class Home extends StatefulHookConsumerWidget {
+  static const String id = 'home';
   const Home({super.key});
 
   @override

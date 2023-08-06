@@ -1,9 +1,11 @@
 import 'dart:developer';
 
 import 'package:firedart/firestore/firestore.dart';
+import 'package:sws/mobile_app/src/domain/models/custom_match/custom_match_model.dart';
 import 'package:sws/mobile_app/src/domain/models/custom_match/live_match.dart';
 import 'package:sws/mobile_app/src/domain/models/news_models/news-model.dart';
 import 'package:sws/mobile_app/src/domain/models/news_models/top_news_model.dart';
+import 'package:sws/mobile_app/src/domain/models/news_models/video_news.dart';
 
 class PostServices {
   static Future<List<News>> getAllNews() async {
@@ -49,5 +51,35 @@ class PostServices {
       }
     }
     return matches;
+  }
+
+  static Future<List<VideoNews>> getAllVideo() async {
+    List<VideoNews> list = [];
+    var map = await Firestore.instance.collection("videos").get();
+    for (final item in map) {
+      try {
+        VideoNews videoNews = VideoNews.fromJson(item.map);
+        videoNews.docID = item.id;
+        list.add(videoNews);
+      } catch (e) {
+        log("GETTING VideoNews ERROR* $e");
+      }
+    }
+    return list;
+  }
+
+  static Future<List<CustomMatch>> getAllMatches() async {
+    List<CustomMatch> list = [];
+    var map = await Firestore.instance.collection("matches").get();
+    for (final item in map) {
+      try {
+        CustomMatch match = CustomMatch.fromJson(item.map);
+        match.docID = item.id;
+        list.add(match);
+      } catch (e) {
+        log("GETTING CustomMatches ERROR* $e");
+      }
+    }
+    return list;
   }
 }

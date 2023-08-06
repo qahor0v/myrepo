@@ -1,19 +1,17 @@
-import 'package:sws/mobile_app/src/utils/constants/keys.dart';
-
 class ScoreRequestURLs {
-  static String getCountries =
+  static String getCountries(String scoreKEY) =>
       "https://apiv3.apifootball.com/?action=get_countries&APIkey=$scoreKEY";
 
-  static String getCompetitions(String id) =>
+  static String getCompetitions(String id, String scoreKEY) =>
       "https://apiv3.apifootball.com/?action=get_leagues&country_id=$id&APIkey=$scoreKEY";
 
-  static String getTeams(String id) =>
+  static String getTeams(String id, String scoreKEY) =>
       "https://apiv3.apifootball.com/?action=get_teams&league_id=$id&APIkey=$scoreKEY";
 
-  static String getStandings(String id) =>
+  static String getStandings(String id, String scoreKEY) =>
       "https://apiv3.apifootball.com/?action=get_standings&league_id=$id&APIkey=$scoreKEY";
 
-  static String getEvents(String id) {
+  static String getEvents(String id, String scoreKEY) {
     DateTime now = DateTime.now();
     DateTime yesterday = now.subtract(const Duration(hours: 12));
     DateTime tomorrow = now.add(const Duration(hours: 12));

@@ -10,27 +10,28 @@ class ScoreServices extends ScoreServicesFunctions {
   static final dio = Dio();
 
   @override
-  Future getComments(String id) {
+  Future getComments(String id, String scoreKEY) {
     // TODO: implement getComments
     throw UnimplementedError();
   }
 
   @override
-  Future getCompetitions(String id) async {
-    final result = await dio.get(ScoreRequestURLs.getCompetitions(id));
+  Future getCompetitions(String id, String scoreKEY) async {
+    final result =
+        await dio.get(ScoreRequestURLs.getCompetitions(id, scoreKEY));
     return result.data;
   }
 
   @override
   Future getCountries() async {
-    final result = await dio.get(ScoreRequestURLs.getCountries);
+    final result = await dio.get(ScoreRequestURLs.getCountries(''));
     return result;
   }
 
   @override
-  Future<List<MatchEvent>> getEvents(String id) async {
+  Future<List<MatchEvent>> getEvents(String id, String scoreKEY) async {
     List<MatchEvent> events = [];
-    final result = await dio.get(ScoreRequestURLs.getEvents(id));
+    final result = await dio.get(ScoreRequestURLs.getEvents(id, scoreKEY));
     for (var item in result.data) {
       try {
         events.add(MatchEvent.fromJson(item));
@@ -43,26 +44,26 @@ class ScoreServices extends ScoreServicesFunctions {
   }
 
   @override
-  Future getHeadToHead(String id) {
+  Future getHeadToHead(String id, String scoreKEY) {
     // TODO: implement getHeadToHead
     throw UnimplementedError();
   }
 
   @override
-  Future getLineups(String id) {
+  Future getLineups(String id, String scoreKEY) {
     // TODO: implement getLineups
     throw UnimplementedError();
   }
 
   @override
-  Future getPlayers(String id) {
+  Future getPlayers(String id, String scoreKEY) {
     // TODO: implement getPlayers
     throw UnimplementedError();
   }
 
   @override
-  Future<List<Standing>> getStandings(String id) async {
-    final result = await dio.get(ScoreRequestURLs.getStandings(id));
+  Future<List<Standing>> getStandings(String id, String scoreKEY) async {
+    final result = await dio.get(ScoreRequestURLs.getStandings(id, scoreKEY));
     List<Standing> standings = [];
 
     for (final res in result.data) {
@@ -77,24 +78,24 @@ class ScoreServices extends ScoreServicesFunctions {
   }
 
   Future testStanding(String id) async {
-    final result = await dio.get(ScoreRequestURLs.getStandings(id));
+    final result = await dio.get(ScoreRequestURLs.getStandings('', ''));
     return result.data;
   }
 
   @override
-  Future getStats(String id) {
+  Future getStats(String id, String scoreKEY) {
     // TODO: implement getStats
     throw UnimplementedError();
   }
 
   @override
-  Future getTeams(String id) async {
-    final result = await dio.get(ScoreRequestURLs.getTeams(id));
+  Future getTeams(String id, String scoreKEY) async {
+    final result = await dio.get(ScoreRequestURLs.getTeams(id, scoreKEY));
     return result;
   }
 
   @override
-  Future getWebsockets(String id) {
+  Future getWebsockets(String id, String scoreKEY) {
     // TODO: implement getWebsockets
     throw UnimplementedError();
   }

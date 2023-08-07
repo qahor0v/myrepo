@@ -1,6 +1,14 @@
 import 'package:intl/intl.dart';
 
 class TimeParser {
+  String date;
+  String time;
+
+  TimeParser({
+    required this.time,
+    required this.date,
+  });
+
   // String apiTime = "21:00";
   // DateFormat apiTimeFormat = DateFormat("HH:mm");
   // DateTime apiDateTime = apiTimeFormat.parse(apiTime);
@@ -35,5 +43,17 @@ class TimeParser {
       minRes = "$min";
     }
     return "$hourRes:$minRes";
+  }
+
+  static TimeParser parse(String time) {
+    final date = DateTime.parse(time);
+    final month = date.month < 10 ? "0${date.month}" : "${date.month}";
+    final day = date.day < 10 ? "0${date.day}" : "${date.day}";
+    final min = date.minute < 10 ? "0${date.minute}" : "${date.minute}";
+    final hour = date.hour < 10 ? "0${date.hour}" : "${date.hour}";
+    return TimeParser(
+      time: "$hour:$min",
+      date: "$day.$month.${date.year}",
+    );
   }
 }

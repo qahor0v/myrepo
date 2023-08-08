@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sws/mobile_app/src/config/router/routers.dart';
 import 'package:sws/mobile_app/src/config/themes/app_colors.dart';
 import 'package:sws/mobile_app/src/presentation/pages/intro_pages/splash_page.dart';
-import 'package:sws/mobile_app/src/presentation/pages/navbar_pages/home.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

@@ -32,42 +32,46 @@ class HomeMatchWidget extends HookConsumerWidget {
             childCount: data.length > 8 ? 8 : data.length + 1,
             (context, index) {
               if (index == 0) {
-                return Padding(
-                  padding: const EdgeInsets.only(top: 16, bottom: 8),
-                  child: Row(
-                    children: [
-                      Text(
-                        "O'yinlar",
-                        style: GoogleFonts.lato(
-                          color: Colors.white,
-                          fontSize: 18,
+                if (data.isNotEmpty) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 16, bottom: 8),
+                    child: Row(
+                      children: [
+                        Text(
+                          "O'yinlar",
+                          style: GoogleFonts.lato(
+                            color: Colors.white,
+                            fontSize: 18,
+                          ),
                         ),
-                      ),
-                      const Spacer(),
-                      InkWell(
-                        onTap: () {
-                          go(context, OpenAllMatchesPage(events: data));
-                        },
-                        child: Row(
-                          children: [
-                            Text(
-                              "Barchasi",
-                              style: GoogleFonts.lato(
-                                color: mainColor,
-                                fontSize: 18,
+                        const Spacer(),
+                        InkWell(
+                          onTap: () {
+                            go(context, OpenAllMatchesPage(events: data));
+                          },
+                          child: Row(
+                            children: [
+                              Text(
+                                "Barchasi",
+                                style: GoogleFonts.lato(
+                                  color: mainColor,
+                                  fontSize: 18,
+                                ),
                               ),
-                            ),
-                            WBox(4.0),
-                            const Icon(
-                              Icons.navigate_next_sharp,
-                              color: mainColor,
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                );
+                              WBox(4.0),
+                              const Icon(
+                                Icons.navigate_next_sharp,
+                                color: mainColor,
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                } else {
+                  return WBox(0.0);
+                }
               } else {
                 final event = data[index - 1];
                 return InkWell(

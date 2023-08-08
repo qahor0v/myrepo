@@ -6,6 +6,7 @@ import 'package:iconly/iconly.dart';
 import 'package:sws/mobile_app/src/config/router/navigator.dart';
 import 'package:sws/mobile_app/src/config/themes/app_colors.dart';
 import 'package:sws/mobile_app/src/config/themes/fonts.dart';
+import 'package:sws/mobile_app/src/domain/models/news_models/top_news_model.dart';
 import 'package:sws/mobile_app/src/domain/models/score_models/match_event_model/match.dart';
 import 'package:sws/mobile_app/src/presentation/providers/news_providers.dart';
 import 'package:sws/mobile_app/src/presentation/providers/soccer_providers.dart';
@@ -276,3 +277,5 @@ class _HomePageState extends ConsumerState<HomePage>
   @override
   bool get wantKeepAlive => true;
 }
+
+

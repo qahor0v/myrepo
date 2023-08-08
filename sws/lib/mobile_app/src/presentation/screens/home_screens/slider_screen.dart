@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:sws/mobile_app/src/config/router/navigator.dart';
 import 'package:sws/mobile_app/src/config/themes/app_colors.dart';
 import 'package:sws/mobile_app/src/presentation/providers/news_providers.dart';
 import 'package:sws/mobile_app/src/presentation/screens/helpers/sized_box.dart';
+import 'package:sws/mobile_app/src/presentation/screens/news_screens/top_news.dart';
 
 class HomeSliderScreen extends ConsumerWidget {
   const HomeSliderScreen({super.key});
@@ -32,37 +34,42 @@ class HomeSliderScreen extends ConsumerWidget {
                   child: CachedNetworkImage(
                     fit: BoxFit.cover,
                     imageUrl: e.banner,
-                    imageBuilder: (context, imageProvider) => Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                    imageBuilder: (context, imageProvider) => InkWell(
+                      onTap: () {
+                        go(context, OpenTopNewsPage(news: e));
+                      },
                       child: Container(
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.bottomCenter,
-                            end: Alignment.topCenter,
-                            colors: [
-                              Colors.black,
-                              Colors.transparent,
-                              Colors.transparent,
-                            ],
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.cover,
                           ),
                         ),
-                        child: Align(
-                          alignment: Alignment.bottomLeft,
-                          child: Text(
-                            e.title,
-                            maxLines: 2,
-                            textAlign: TextAlign.left,
-                            style: GoogleFonts.lato(
-                              color: Colors.white,
-                              fontSize: 18,
+                        child: Container(
+                          padding: const EdgeInsets.all(8.0),
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                              colors: [
+                                Colors.black,
+                                Colors.transparent,
+                                Colors.transparent,
+                              ],
+                            ),
+                          ),
+                          child: Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Text(
+                              e.title,
+                              maxLines: 2,
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.lato(
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
                             ),
                           ),
                         ),

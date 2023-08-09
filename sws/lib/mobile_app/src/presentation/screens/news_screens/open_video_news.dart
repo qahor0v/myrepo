@@ -1,33 +1,31 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sws/mobile_app/src/config/themes/fonts.dart';
-import 'package:sws/mobile_app/src/domain/models/news_models/top_news_model.dart';
+import 'package:sws/mobile_app/src/domain/models/news_models/video_news.dart';
 import 'package:sws/mobile_app/src/presentation/screens/helpers/back_button.dart';
 import 'package:sws/mobile_app/src/presentation/screens/helpers/sized_box.dart';
-import 'package:sws/mobile_app/src/presentation/screens/shimmers/app_shimmer.dart';
 import 'package:sws/mobile_app/src/utils/extensions/time_parsers.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class OpenTopNewsPage extends StatefulWidget {
-  final TopNews news;
+class OpenVideoNews extends StatefulWidget {
+  final VideoNews news;
 
-  const OpenTopNewsPage({
+  const OpenVideoNews({
     super.key,
     required this.news,
   });
 
   @override
-  State<OpenTopNewsPage> createState() => _OpenTopNewsPageState();
+  State<OpenVideoNews> createState() => _OpenVideoNewsState();
 }
 
-class _OpenTopNewsPageState extends State<OpenTopNewsPage> {
+class _OpenVideoNewsState extends State<OpenVideoNews> {
   late YoutubePlayerController youtubePlayerController;
 
   @override
   void initState() {
     super.initState();
     youtubePlayerController = YoutubePlayerController(
-      initialVideoId: widget.news.video,
+      initialVideoId: widget.news.videoID,
       flags: const YoutubePlayerFlags(
         autoPlay: false,
         mute: false,
@@ -85,30 +83,14 @@ class _OpenTopNewsPageState extends State<OpenTopNewsPage> {
                     ),
                   ),
                   HBox(8.0),
-                  if (widget.news.useVideo)
-                    if (widget.news.fromYoutube)
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16, right: 16),
-                        child: SizedBox(
-                          height: 200,
-                          width: double.infinity,
-                          child: player,
-                        ),
-                      )
-                    else
-                      HBox(0.0)
-                  else
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16, right: 16),
-                      child: CachedNetworkImage(
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                        imageUrl: widget.news.banner,
-                        placeholder: (c, s) {
-                          return const AppShimmer();
-                        },
-                      ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    child: SizedBox(
+                      height: 200,
+                      width: double.infinity,
+                      child: player,
                     ),
+                  ),
                   HBox(16.0),
                   Padding(
                     padding: const EdgeInsets.only(

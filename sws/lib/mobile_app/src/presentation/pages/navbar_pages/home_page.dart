@@ -82,7 +82,9 @@ class _HomePageState extends ConsumerState<HomePage>
               ),
               HomeNewsWidget(videosProvider: newsProvider),
               HomeCategoryButtonWidget(
-                onTap: () {},
+                onTap: () {
+
+                },
                 title: "Tomosha qiling!",
                 videosProvider: videosProvider,
               ),

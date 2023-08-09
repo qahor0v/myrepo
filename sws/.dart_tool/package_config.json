@@ -14,6 +14,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "animated_background",
+      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/animated_background-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "appinio_video_player",
       "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/appinio_video_player-1.2.1",
       "packageUri": "lib/",
@@ -878,7 +884,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-08-09T01:00:08.943130Z",
+  "generated": "2023-08-09T07:27:27.966131Z",
   "generator": "pub",
   "generatorVersion": "3.0.6"
 }

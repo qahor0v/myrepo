@@ -12,7 +12,7 @@ class MyWebApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Silk Way Sport',
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.black,
+        scaffoldBackgroundColor: Colors.transparent,
         colorScheme: ColorScheme.fromSeed(seedColor: mainColor),
         useMaterial3: true,
       ),

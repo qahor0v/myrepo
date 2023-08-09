@@ -112,8 +112,9 @@ void homeMore(BuildContext context) {
                   ),
                   onTap: () async {
                     if (!await launchUrl(
-                        Uri.parse('https://t.me/silkway_sport_bot'),
-                        mode: LaunchMode.externalApplication)) {
+                      Uri.parse('https://t.me/silkway_sport_bot'),
+                      mode: LaunchMode.externalApplication,
+                    )) {
                       throw Exception('Xatolik!');
                     }
                   },

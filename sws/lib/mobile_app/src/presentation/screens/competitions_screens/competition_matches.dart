@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sws/mobile_app/src/presentation/providers/soccer_providers.dart';
 import 'package:sws/mobile_app/src/presentation/screens/competitions_screens/match_event_screen.dart';
+import 'package:sws/mobile_app/src/presentation/screens/helpers/empty_screen.dart';
 import 'package:sws/mobile_app/src/presentation/screens/helpers/error_screen.dart';
 import 'package:sws/mobile_app/src/presentation/screens/helpers/loading_screen.dart';
 
@@ -29,7 +30,13 @@ class CompetitionEvents extends HookConsumerWidget {
         },
         error: (e, m) {
           log("Error GET_MATCHES_PAGE* ", error: e, stackTrace: m);
-          return const AppError();
+          return const Center(
+            child: SizedBox(
+              height: 150,
+              width: 150,
+              child: AppEmptyWidget(),
+            ),
+          );
         },
         loading: () {
           return const AppLoading();

@@ -32,7 +32,7 @@ class OpenCompetitionPage extends HookConsumerWidget {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Expanded(
-                    child: InkWell(
+                    child: GestureDetector(
                       onTap: () {
                         index.value = 0;
                         controller.jumpToPage(0);
@@ -64,7 +64,7 @@ class OpenCompetitionPage extends HookConsumerWidget {
                     ),
                   ),
                   Expanded(
-                    child: InkWell(
+                    child: GestureDetector(
                       onTap: () {
                         index.value = 1;
                         controller.jumpToPage(1);

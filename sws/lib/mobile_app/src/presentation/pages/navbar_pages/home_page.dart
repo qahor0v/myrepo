@@ -16,7 +16,14 @@ import 'package:sws/mobile_app/src/presentation/screens/home_screens/more_bottom
 import 'package:sws/mobile_app/src/presentation/screens/home_screens/slider_screen.dart';
 
 class HomePage extends StatefulHookConsumerWidget {
-  const HomePage({super.key});
+  final void Function() goVideos;
+  final void Function() goNews;
+
+  const HomePage({
+    super.key,
+    required this.goNews,
+    required this.goVideos,
+  });
 
   @override
   ConsumerState<HomePage> createState() => _HomePageState();
@@ -76,15 +83,13 @@ class _HomePageState extends ConsumerState<HomePage>
               const HomeSliderScreen(),
               HomeMatchWidget(eventsHelper: matchEvents),
               HomeCategoryButtonWidget(
-                onTap: () {},
+                onTap: widget.goNews,
                 title: "So'nggi yangiliklar",
                 videosProvider: newsProvider,
               ),
               HomeNewsWidget(videosProvider: newsProvider),
               HomeCategoryButtonWidget(
-                onTap: () {
-
-                },
+                onTap: widget.goVideos,
                 title: "Tomosha qiling!",
                 videosProvider: videosProvider,
               ),

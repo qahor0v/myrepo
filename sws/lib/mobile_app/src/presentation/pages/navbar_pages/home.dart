@@ -9,6 +9,7 @@ import 'package:sws/mobile_app/src/presentation/screens/navbar_screen.dart';
 
 class Home extends StatefulHookConsumerWidget {
   static const String id = 'home';
+
   const Home({super.key});
 
   @override
@@ -44,11 +45,24 @@ class _HomeState extends ConsumerState<Home>
             x.value = 0.75;
           }
         },
-        children: const [
-          HomePage(),
-          NewsPage(),
-          CompetitionsPage(),
-          TVPage(),
+        children: [
+          HomePage(
+            goNews: () {
+              controller.jumpToPage(1);
+              page.value = 1;
+              showBall.value = true;
+              x.value = -0.2;
+            },
+            goVideos: () {
+              controller.jumpToPage(3);
+              page.value = 3;
+              showBall.value = true;
+              x.value = 0.75;
+            },
+          ),
+          const NewsPage(),
+          const CompetitionsPage(),
+          const TVPage(),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

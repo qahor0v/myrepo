@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sws/mobile_app/src/config/themes/app_colors.dart';
 import 'package:sws/mobile_app/src/config/themes/fonts.dart';
 import 'package:sws/mobile_app/src/domain/models/score_models/match_event_model/match.dart';
+import 'package:sws/mobile_app/src/presentation/providers/key_provider.dart';
 import 'package:sws/mobile_app/src/presentation/providers/news_providers.dart';
 import 'package:sws/mobile_app/src/presentation/providers/soccer_providers.dart';
 import 'package:sws/mobile_app/src/presentation/screens/helpers/sized_box.dart';
@@ -53,7 +54,7 @@ class _HomePageState extends ConsumerState<HomePage>
         actions: [
           IconButton(
             onPressed: () {
-              homeMore(context);
+              homeMore(context, ref.watch(keyProvider)!.url);
             },
             icon: const Icon(
               Icons.more_vert_sharp,

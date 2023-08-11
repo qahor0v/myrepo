@@ -158,6 +158,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "cross_file",
+      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/cross_file-0.3.3+4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "crypto",
       "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/crypto-3.0.3",
       "packageUri": "lib/",
@@ -572,6 +578,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "share_plus",
+      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/share_plus-7.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "share_plus_platform_interface",
+      "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/share_plus_platform_interface-3.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "shelf",
       "rootUri": "file:///C:/Users/1/AppData/Local/Pub/Cache/hosted/pub.dev/shelf-1.4.1",
       "packageUri": "lib/",
@@ -884,7 +902,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-08-10T01:25:53.284443Z",
+  "generated": "2023-08-11T15:27:19.199143Z",
   "generator": "pub",
   "generatorVersion": "3.0.6"
 }

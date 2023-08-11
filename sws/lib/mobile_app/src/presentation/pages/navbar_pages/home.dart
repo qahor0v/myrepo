@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:sws/mobile_app/src/presentation/pages/navbar_pages/competitions_page.dart';
 import 'package:sws/mobile_app/src/presentation/pages/navbar_pages/home_page.dart';
 import 'package:sws/mobile_app/src/presentation/pages/navbar_pages/news_page.dart';
@@ -80,3 +81,4 @@ class _HomeState extends ConsumerState<Home>
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }
+

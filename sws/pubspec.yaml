@@ -59,6 +59,7 @@ dependencies:
   youtube_player_flutter: ^8.1.2
   appinio_video_player: ^1.2.1
   animated_background: ^2.0.0
+  share_plus: ^7.1.0
 
 dev_dependencies:
   flutter_test:

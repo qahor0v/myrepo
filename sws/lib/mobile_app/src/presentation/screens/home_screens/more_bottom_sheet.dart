@@ -5,9 +5,10 @@ import 'package:sws/mobile_app/src/config/themes/app_colors.dart';
 import 'package:sws/mobile_app/src/config/themes/fonts.dart';
 import 'package:sws/mobile_app/src/presentation/screens/helpers/sized_box.dart';
 import 'package:sws/mobile_app/src/utils/constants/asset_icons.dart';
+import 'package:sws/mobile_app/src/utils/extensions/sharer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-void homeMore(BuildContext context) {
+void homeMore(BuildContext context, String url) {
   showModalBottomSheet(
     context: context,
     builder: (context) {
@@ -179,36 +180,49 @@ void homeMore(BuildContext context) {
                 HBox(48.0),
                 Row(
                   children: [
-                    Row(
-                      children: [
-                        const Icon(Icons.share, color: mainColor),
-                        WBox(4.0),
-                        const Text(
-                          "Ilovani ulashish",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: fontFamily,
+                    GestureDetector(
+                      onTap: () {
+                        share(
+                            "Slik Way Sport - Endi sport biz bilan!\nYuklab oling: ${url}");
+                      },
+                      child: Row(
+                        children: [
+                          const Icon(Icons.share, color: mainColor),
+                          WBox(4.0),
+                          const Text(
+                            "Ilovani ulashish",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: fontFamily,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     const Spacer(),
-                    Row(
-                      children: [
-                        const Icon(Icons.star_rate, color: mainColor),
-                        WBox(4.0),
-                        const Text(
-                          "Ilovani baholash",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: fontFamily,
+                    GestureDetector(
+                      onTap: () async {
+                        if (!await launchUrl(Uri.parse(url))) {
+                          throw Exception('Xatolik!');
+                        }
+                      },
+                      child: Row(
+                        children: [
+                          const Icon(Icons.star_rate, color: mainColor),
+                          WBox(4.0),
+                          const Text(
+                            "Ilovani baholash",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: fontFamily,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),

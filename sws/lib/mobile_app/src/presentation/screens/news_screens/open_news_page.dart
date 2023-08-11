@@ -1,13 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sws/mobile_app/src/config/themes/fonts.dart';
 import 'package:sws/mobile_app/src/domain/models/news_models/news-model.dart';
+import 'package:sws/mobile_app/src/presentation/providers/key_provider.dart';
 import 'package:sws/mobile_app/src/presentation/screens/helpers/back_button.dart';
 import 'package:sws/mobile_app/src/presentation/screens/helpers/sized_box.dart';
 import 'package:sws/mobile_app/src/presentation/screens/shimmers/app_shimmer.dart';
+import 'package:sws/mobile_app/src/utils/extensions/sharer.dart';
 import 'package:sws/mobile_app/src/utils/extensions/time_parsers.dart';
 
-class OpenNewsPage extends StatelessWidget {
+class OpenNewsPage extends HookConsumerWidget {
   final News news;
 
   const OpenNewsPage({
@@ -16,7 +19,7 @@ class OpenNewsPage extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -31,7 +34,10 @@ class OpenNewsPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        share(
+                            "${news.title}\nBatafsil Silk Way Sport-da!\nYuklab olish:${ref.watch(keyProvider)!.url}");
+                      },
                       icon: const Icon(
                         Icons.share,
                         color: Colors.white,

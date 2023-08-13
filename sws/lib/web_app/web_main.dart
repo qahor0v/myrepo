@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sws/mobile_app/src/config/router/routers.dart';
 import 'package:sws/mobile_app/src/config/themes/app_colors.dart';
-import 'package:sws/web_app/src/presentation/pages/web_home.dart';
+import 'package:sws/web_app/src/presentation/pages/web_loading_page.dart';
+import 'package:sws/web_app/src/presentation/widgets/helpers/back_wrapper.dart';
 
 class MyWebApp extends StatelessWidget {
   const MyWebApp({super.key});
@@ -16,8 +17,8 @@ class MyWebApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: mainColor),
         useMaterial3: true,
       ),
-      home: const WebHome(),
-      routes: AppRouter.routers,
+      home: const WebBackWrapper(child: WebSplashPage()),
+      routes: WebRouters.routers,
     );
   }
 }

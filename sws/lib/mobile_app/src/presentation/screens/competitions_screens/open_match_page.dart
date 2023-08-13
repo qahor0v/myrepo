@@ -28,6 +28,7 @@ class OpenMatchPage extends HookConsumerWidget {
     final tabIndex = useState(0);
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.black,
         body: Padding(
           padding: const EdgeInsets.only(
             left: 16,

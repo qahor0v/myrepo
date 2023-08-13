@@ -1,8 +1,8 @@
-import 'package:firedart/firedart.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sws/mobile_app/src/utils/constants/keys.dart';
+import 'package:sws/web_app/src/utils/constants.dart';
 import 'package:sws/web_app/web_main.dart';
 
 void main() async {
@@ -14,7 +14,16 @@ void main() async {
       statusBarBrightness: Brightness.dark,
     ),
   );
-  Firestore.initialize(projectID);
+  // Firestore.initialize(projectID);
+   await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: apiKey,
+      appId: appId,
+      messagingSenderId: messagingSenderId,
+      projectId: projectId,
+      storageBucket: storageBucket,
+    ),
+  );
   runApp(
     const ProviderScope(
       child: MyWebApp(),

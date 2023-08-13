@@ -1,16 +1,20 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:iconly/iconly.dart';
 import 'package:image_network/image_network.dart';
+import 'package:sws/mobile_app/src/config/router/navigator.dart';
 import 'package:sws/mobile_app/src/config/themes/app_colors.dart';
 import 'package:sws/mobile_app/src/config/themes/fonts.dart';
 import 'package:sws/mobile_app/src/presentation/providers/soccer_providers.dart';
-import 'package:sws/mobile_app/src/presentation/screens/helpers/error_screen.dart';
+import 'package:sws/mobile_app/src/presentation/screens/competitions_screens/open_match_page.dart';
 import 'package:sws/mobile_app/src/presentation/screens/helpers/loading_screen.dart';
 import 'package:sws/mobile_app/src/presentation/screens/helpers/sized_box.dart';
 import 'package:sws/mobile_app/src/presentation/screens/shimmers/app_shimmer.dart';
 import 'package:sws/mobile_app/src/utils/extensions/match_status.dart';
 import 'package:sws/mobile_app/src/utils/extensions/time_parsers.dart';
+import 'package:sws/web_app/src/presentation/screens/sizer_wrapper.dart';
 import 'package:sws/web_app/src/presentation/widgets/focused_wrapper.dart';
 
 class WebHomeMatchWidget extends HookConsumerWidget {
@@ -40,7 +44,9 @@ class WebHomeMatchWidget extends HookConsumerWidget {
                               : (data.length - data.length ~/ 2), (index) {
                         final event = data[index];
                         return FocusedWrapper(
-                          onTap: () {},
+                          onTap: () {
+                            go(context, OpenMatchPage(event: event));
+                          },
                           child: (focused) {
                             return AnimatedScale(
                               scale: focused ? 1.05 : 1.0,
@@ -158,8 +164,9 @@ class WebHomeMatchWidget extends HookConsumerWidget {
                                             ),
                                           ),
                                         if (matchStatus(event.match_status)
-                                                .code ==
-                                            1)
+                                                    .code ==
+                                                1 &&
+                                            event.match_status.isNotEmpty)
                                           Text(
                                             "${event.match_status}'",
                                             style: const TextStyle(
@@ -341,8 +348,9 @@ class WebHomeMatchWidget extends HookConsumerWidget {
                                             ),
                                           ),
                                         if (matchStatus(event.match_status)
-                                                .code ==
-                                            1)
+                                                    .code ==
+                                                1 &&
+                                            event.match_status.isNotEmpty)
                                           Text(
                                             "${event.match_status}'",
                                             style: const TextStyle(
@@ -437,7 +445,8 @@ class WebHomeMatchWidget extends HookConsumerWidget {
             );
           },
           error: (e, m) {
-            return const AppError();
+            log("Web home error --- $e, $m");
+            return WBox(0.0);
           },
           loading: () {
             return const AppLoading();

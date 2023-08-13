@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sws/mobile_app/src/domain/models/score_models/match_event_model/match.dart';
@@ -7,6 +8,7 @@ import 'package:sws/mobile_app/src/domain/models/score_models/standing_model/sta
 import 'package:sws/mobile_app/src/domain/repository/score_services/score_services.dart';
 import 'package:sws/mobile_app/src/presentation/providers/key_provider.dart';
 import 'package:sws/mobile_app/src/utils/constants/score_sources.dart';
+import 'package:sws/web_app/src/presentation/providers/score_providers.dart';
 
 final getStandingProvider = FutureProvider.family((ref, String id) async {
   final key = ref.watch(keyProvider)!.key;
@@ -23,7 +25,8 @@ final getEventsProvider = FutureProvider.family((ref, String id) async {
 });
 
 final getAllEventsProvider = FutureProvider((ref) async {
-  final key = ref.watch(keyProvider)!.key;
+  final key =
+      kIsWeb ? ref.watch(webKeyProvider)!.key : ref.watch(keyProvider)!.key;
   List<MatchEvent> events = [];
 
   for (Turnir turnir in Turnir.all) {

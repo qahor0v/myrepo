@@ -8,13 +8,12 @@ import 'package:sws/mobile_app/src/config/router/navigator.dart';
 import 'package:sws/mobile_app/src/config/themes/app_colors.dart';
 import 'package:sws/mobile_app/src/config/themes/fonts.dart';
 import 'package:sws/mobile_app/src/presentation/providers/soccer_providers.dart';
-import 'package:sws/mobile_app/src/presentation/screens/competitions_screens/open_match_page.dart';
 import 'package:sws/mobile_app/src/presentation/screens/helpers/loading_screen.dart';
 import 'package:sws/mobile_app/src/presentation/screens/helpers/sized_box.dart';
 import 'package:sws/mobile_app/src/presentation/screens/shimmers/app_shimmer.dart';
 import 'package:sws/mobile_app/src/utils/extensions/match_status.dart';
 import 'package:sws/mobile_app/src/utils/extensions/time_parsers.dart';
-import 'package:sws/web_app/src/presentation/screens/sizer_wrapper.dart';
+import 'package:sws/web_app/src/presentation/pages/ope_pages/open_match_page.dart';
 import 'package:sws/web_app/src/presentation/widgets/focused_wrapper.dart';
 
 class WebHomeMatchWidget extends HookConsumerWidget {
@@ -45,7 +44,7 @@ class WebHomeMatchWidget extends HookConsumerWidget {
                         final event = data[index];
                         return FocusedWrapper(
                           onTap: () {
-                            go(context, OpenMatchPage(event: event));
+                            go(context, OpenMatchWebPage(event: event));
                           },
                           child: (focused) {
                             return AnimatedScale(

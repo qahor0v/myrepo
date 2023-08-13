@@ -48,7 +48,7 @@ class _WebHomeState extends ConsumerState<WebHome> {
         bool isTablet = (type == DeviceType.TABLET);
         return WebBackWrapper(
           child: Scaffold(
-            drawer: isMobile ? const WebSidebar() : null,
+            drawer: isMobile ? const WebSidebar(index: 0) : null,
             appBar: isMobile
                 ? AppBar(
                     iconTheme: const IconThemeData(color: Colors.white),

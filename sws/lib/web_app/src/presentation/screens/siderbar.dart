@@ -6,7 +6,11 @@ import 'package:sws/mobile_app/src/config/themes/fonts.dart';
 import 'package:sws/mobile_app/src/utils/constants/asset_icons.dart';
 
 class WebSidebar extends StatelessWidget {
-  const WebSidebar({super.key});
+  final int index;
+  const WebSidebar({
+    super.key,
+    required this.index,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,70 +23,70 @@ class WebSidebar extends StatelessWidget {
               onTap: () {
                 close(context);
               },
-              leading: const ImageIcon(
-                AssetImage(AssetIcons.home),
-                color: Colors.white,
+              leading: ImageIcon(
+                const AssetImage(AssetIcons.home),
+                color: index == 0 ? mainColor : Colors.white,
               ),
-              title: const Text(
+              title: Text(
                 "Bosh sahifa",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: index == 0 ? mainColor : Colors.white,
                   fontFamily: fontFamily2,
                 ),
               ),
             ),
             ListTile(
               onTap: () {},
-              leading: const ImageIcon(
-                AssetImage(AssetIcons.news),
-                color: Colors.white,
+              leading: ImageIcon(
+                const AssetImage(AssetIcons.news),
+                color: index == 1 ? mainColor : Colors.white,
               ),
-              title: const Text(
+              title: Text(
                 "Yangiliklar",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: index == 1 ? mainColor : Colors.white,
                   fontFamily: fontFamily2,
                 ),
               ),
             ),
             ListTile(
               onTap: () {},
-              leading: const ImageIcon(
-                AssetImage(AssetIcons.league),
-                color: Colors.white,
+              leading: ImageIcon(
+                const AssetImage(AssetIcons.league),
+                color: index == 2 ? mainColor : Colors.white,
               ),
-              title: const Text(
+              title: Text(
                 "Ligalar",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: index == 2 ? mainColor : Colors.white,
                   fontFamily: fontFamily2,
                 ),
               ),
             ),
             ListTile(
               onTap: () {},
-              leading: const ImageIcon(
+              leading: ImageIcon(
                 AssetImage(AssetIcons.tv),
-                color: Colors.white,
+                color: index == 3 ? mainColor : Colors.white,
               ),
-              title: const Text(
+              title: Text(
                 "TV",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: index == 3 ? mainColor : Colors.white,
                   fontFamily: fontFamily2,
                 ),
               ),
             ),
             ListTile(
               onTap: () {},
-              leading: const Icon(
+              leading: Icon(
                 IconlyLight.info_circle,
-                color: Colors.white,
+                color: index == 4 ? mainColor : Colors.white,
               ),
-              title: const Text(
+              title: Text(
                 "Biz haqimizda",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: index == 4 ? mainColor : Colors.white,
                   fontFamily: fontFamily2,
                 ),
               ),
